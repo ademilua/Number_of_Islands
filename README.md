@@ -1,5 +1,7 @@
 # Number_of_Islands
-This code is writing with Ada and Spark. Spark was used to prove the correctness of the program.
+I have solved this task using recursion to check the neigbours.
+This code is writing with Ada and Spark. 
+Spark was used to prove the correctness of the program.
 
 Description:
 You are given a map of an area. The map is a NxM grid of tiles. A tile can either be a water tile (0) or a land tile (1).
@@ -14,3 +16,5 @@ A text file that on the first line contains two integers N M. This line is follo
 01001
 Output:
 Your program should return a single integer containing number of islands on the map (e.g 5 in the example above).
+
+
