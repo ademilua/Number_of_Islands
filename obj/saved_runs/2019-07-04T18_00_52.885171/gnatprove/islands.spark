@@ -1,0 +1,100 @@
+{
+  "spark": [
+    {
+      "name": "Islands",
+      "sloc": [
+        {
+          "file": "islands.ads",
+          "line": 1
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Islands.Visit_Islands",
+      "sloc": [
+        {
+          "file": "islands.ads",
+          "line": 15
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Islands.Count_Islands",
+      "sloc": [
+        {
+          "file": "islands.ads",
+          "line": 19
+        }
+      ],
+      "spark": "all"
+    }
+  ],
+  "flow": [
+  ],
+  "assumptions": [
+    {
+      "assumptions": [
+        {
+          "predicate": "CLAIM_EFFECTS",
+          "arg": {
+            "name": "Islands.Visit_Islands",
+            "sloc": [
+              {
+                "file": "islands.ads",
+                "line": 15
+              }
+            ]
+          }
+        }
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Islands.Count_Islands",
+          "sloc": [
+            {
+              "file": "islands.ads",
+              "line": 19
+            }
+          ]
+        }
+      }
+    },
+    {
+      "assumptions": [
+        {
+          "predicate": "CLAIM_EFFECTS",
+          "arg": {
+            "name": "Islands.Visit_Islands",
+            "sloc": [
+              {
+                "file": "islands.ads",
+                "line": 15
+              }
+            ]
+          }
+        }
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Islands.Visit_Islands",
+          "sloc": [
+            {
+              "file": "islands.ads",
+              "line": 15
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "timings": {
+    "marking": 1.88000005437061E-04,
+    "globals (basic)": 1.05999999505002E-04,
+    "globals/properties (advanced)": 1.05999999505002E-04,
+    "flow analysis": 2.06899992190301E-03
+  }
+}

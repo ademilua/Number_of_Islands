@@ -1,0 +1,3 @@
+islands.adb:44:16: medium: loop invariant might fail in first iteration, cannot prove B = J - M_Range'last (e.g. when B = 0 and J = 1)[#0]
+islands.adb:57:13: medium: loop invariant might fail after first iteration, cannot prove B = M (e.g. when B = 1)[#1]
+islands.adb:57:13: medium: loop invariant might fail in first iteration, cannot prove B = M (e.g. when B = 1)[#2]

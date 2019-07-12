@@ -1,0 +1,7 @@
+islands.adb:39:31: medium: overflow check might fail[#6]
+islands.ads:34:40: medium: array index check might fail[#2]
+islands.ads:34:44: medium: array index check might fail (e.g. when J = 5)[#3]
+islands.ads:34:48: medium: contract case might fail[#0]
+islands.ads:35:40: medium: array index check might fail[#4]
+islands.ads:35:44: medium: array index check might fail (e.g. when J = 5)[#5]
+islands.ads:35:56: medium: contract case might fail[#1]

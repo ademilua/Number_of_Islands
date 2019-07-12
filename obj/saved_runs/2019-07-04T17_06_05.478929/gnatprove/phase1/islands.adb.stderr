@@ -1,0 +1,2 @@
+islands.adb:2:06: incorrect use of SPARK_Mode
+islands.adb:2:06: no value was set for SPARK_Mode on "Islands" at islands.ads:1

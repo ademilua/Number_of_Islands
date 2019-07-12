@@ -1,0 +1,2 @@
+islands.ads:31:59: expected type "Standard.Boolean"
+islands.ads:31:59: found type "Standard.Integer"

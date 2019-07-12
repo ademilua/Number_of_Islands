@@ -1,0 +1,5 @@
+islands.adb:40:31: medium: overflow check might fail[#1]
+islands.ads:32:15: medium: postcondition might fail, cannot prove Visit_Islands'Result = Visited_Array[#0]
+islands.ads:38:05: warning: postcondition does not check the outcome of calling "Count_Islands"
+islands.ads:38:05: warning: postcondition does not mention function result
+islands.ads:38:13: medium: postcondition might fail[#2]

@@ -1,0 +1,1 @@
+islands.ads:47:103: medium: postcondition might fail, cannot prove Count_Islands'Result = 0 (e.g. when Count_Islands'Result = 1)[#0]

@@ -1,0 +1,11 @@
+islands.adb:44:16: warning: "B" may be referenced before it has a value
+islands.adb:44:16: high: "B" is not initialized[#3]
+islands.adb:44:16: medium: loop invariant might fail in first iteration, cannot prove B = J - Map_Array'first (e.g. when B = 5 and J = 1)[#6]
+islands.adb:47:44: high: "B" is not initialized[#4]
+islands.adb:49:18: high: "B" is not initialized[#5]
+islands.adb:62:13: warning: "A" may be referenced before it has a value
+islands.adb:62:13: high: "A" is not initialized[#0]
+islands.adb:62:13: medium: loop invariant might fail in first iteration, cannot prove A = (I - Map_Array'First (1)) * Map_Array'length (e.g. when A = 1 and I = 1)[#8]
+islands.adb:65:22: high: "A" is not initialized[#1]
+islands.adb:65:24: medium: overflow check might fail (e.g. when A = Natural'Last-4 and B = 5)[#7]
+islands.adb:67:15: high: "A" is not initialized[#2]

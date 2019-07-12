@@ -1,0 +1,1 @@
+main.adb:14:32: medium: precondition might fail, cannot prove Map_Array'Length = M[#0]

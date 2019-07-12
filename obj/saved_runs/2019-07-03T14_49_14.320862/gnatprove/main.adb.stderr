@@ -1,0 +1,1 @@
+main.adb:23:41: medium: array index check might fail, in call inlined at main.adb:40 (e.g. when i = 1)[#0]

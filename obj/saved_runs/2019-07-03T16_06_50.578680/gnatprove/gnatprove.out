@@ -1,0 +1,25 @@
+Summary of SPARK analysis
+=========================
+
+------------------------------------------------------------------------------------------------------
+SPARK Analysis results        Total      Flow   Interval   CodePeer     Provers   Justified   Unproved
+------------------------------------------------------------------------------------------------------
+Data Dependencies                 .         .          .          .           .           .          .
+Flow Dependencies                 .         .          .          .           .           .          .
+Initialization                    .         .          .          .           .           .          .
+Non-Aliasing                      .         .          .          .           .           .          .
+Run-time Checks                   8         .          .          .    5 (CVC4)           .          3
+Assertions                        .         .          .          .           .           .          .
+Functional Contracts              .         .          .          .           .           .          .
+LSP Verification                  .         .          .          .           .           .          .
+------------------------------------------------------------------------------------------------------
+Total                             8         .          .          .     5 (63%)           .    3 (38%)
+
+
+max steps used for successful proof: 1
+
+Analyzed 1 unit
+in unit main, 3 subprograms and packages out of 3 analyzed
+  Main at main.adb:2 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (1 checks)
+  Main.Count_Islands at main.adb:30 flow analyzed (0 errors, 0 checks and 0 warnings) and not proved, 0 checks out of 1 proved
+  Main.Visit_Islands at main.adb:15 flow analyzed (0 errors, 0 checks and 1 warnings) and not proved, 4 checks out of 6 proved

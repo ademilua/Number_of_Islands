@@ -1,0 +1,2 @@
+islands.ads:47:13: function with output global "Count" is not allowed in SPARK[#0]
+islands.ads:47:13: function with output global "Visited_Array" is not allowed in SPARK[#1]

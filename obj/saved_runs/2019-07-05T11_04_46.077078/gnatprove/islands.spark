@@ -1,0 +1,119 @@
+{
+  "spark": [
+    {
+      "name": "Islands",
+      "sloc": [
+        {
+          "file": "islands.ads",
+          "line": 1
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Islands.Visit_Islands",
+      "sloc": [
+        {
+          "file": "islands.ads",
+          "line": 18
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Islands.Count_Islands",
+      "sloc": [
+        {
+          "file": "islands.ads",
+          "line": 22
+        }
+      ],
+      "spark": "all"
+    }
+  ],
+  "flow": [
+    {
+      "file": "islands.ads",
+      "line": 20,
+      "col": 27,
+      "rule": "GLOBAL_WRONG",
+      "severity": "info",
+      "entity": {
+        "name": "Islands.Visit_Islands",
+        "sloc": [
+          {
+            "file": "islands.ads",
+            "line": 18
+          }
+        ]
+      },
+      "check_tree": {
+      },
+      "how_proved": "flow"
+    }
+  ],
+  "assumptions": [
+    {
+      "assumptions": [
+        {
+          "predicate": "CLAIM_EFFECTS",
+          "arg": {
+            "name": "Islands.Visit_Islands",
+            "sloc": [
+              {
+                "file": "islands.ads",
+                "line": 18
+              }
+            ]
+          }
+        }
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Islands.Visit_Islands",
+          "sloc": [
+            {
+              "file": "islands.ads",
+              "line": 18
+            }
+          ]
+        }
+      }
+    },
+    {
+      "assumptions": [
+        {
+          "predicate": "CLAIM_EFFECTS",
+          "arg": {
+            "name": "Islands.Visit_Islands",
+            "sloc": [
+              {
+                "file": "islands.ads",
+                "line": 18
+              }
+            ]
+          }
+        }
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Islands.Count_Islands",
+          "sloc": [
+            {
+              "file": "islands.ads",
+              "line": 22
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "timings": {
+    "marking": 2.16000000364147E-04,
+    "globals (basic)": 1.27999999676831E-04,
+    "globals/properties (advanced)": 2.26999996812083E-04,
+    "flow analysis": 3.00200004130602E-03
+  }
+}

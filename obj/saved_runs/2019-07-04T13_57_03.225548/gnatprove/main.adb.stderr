@@ -1,0 +1,13 @@
+main.adb:18:04: warning: analyzing unreferenced function "Is_Unvisited_Land"
+main.adb:55:15: function with "in out" parameter is not allowed in SPARK
+main.adb:55:15: violation of aspect SPARK_Mode at line 3
+main.adb:68:23: "Visit_Islands" is not allowed in SPARK (due to function with "in out" parameter)
+main.adb:68:23: violation of aspect SPARK_Mode at line 3
+main.adb:69:23: "Visit_Islands" is not allowed in SPARK (due to function with "in out" parameter)
+main.adb:69:23: violation of aspect SPARK_Mode at line 3
+main.adb:70:23: "Visit_Islands" is not allowed in SPARK (due to function with "in out" parameter)
+main.adb:70:23: violation of aspect SPARK_Mode at line 3
+main.adb:71:23: "Visit_Islands" is not allowed in SPARK (due to function with "in out" parameter)
+main.adb:71:23: violation of aspect SPARK_Mode at line 3
+main.adb:86:33: "Visit_Islands" is not allowed in SPARK (due to function with "in out" parameter)
+main.adb:86:33: violation of aspect SPARK_Mode at line 3

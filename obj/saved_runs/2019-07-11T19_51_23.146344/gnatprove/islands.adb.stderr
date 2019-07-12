@@ -1,0 +1,1 @@
+islands.adb:63:13: medium: loop invariant might fail in first iteration, cannot prove Count < A + B (e.g. when A = 0 and B = 5 and Count = 5)[#0]

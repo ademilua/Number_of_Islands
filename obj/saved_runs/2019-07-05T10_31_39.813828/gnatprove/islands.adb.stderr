@@ -1,0 +1,6 @@
+islands.adb:29:07: warning: initialization of "Visited_Array" has no effect[#1]
+islands.adb:35:24: warning: statement has no effect[#5]
+islands.adb:36:27: warning: statement has no effect[#4]
+islands.adb:37:13: warning: statement has no effect[#2]
+islands.adb:38:30: warning: unused assignment[#3]
+islands.ads:22:27: warning: unused initial value of "Map_Array"[#0]

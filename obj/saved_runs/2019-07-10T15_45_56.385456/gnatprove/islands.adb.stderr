@@ -1,0 +1,2 @@
+islands.adb:38:32: medium: assertion might fail, cannot prove Count < Integer'last[#0]
+islands.adb:39:31: medium: overflow check might fail[#1]

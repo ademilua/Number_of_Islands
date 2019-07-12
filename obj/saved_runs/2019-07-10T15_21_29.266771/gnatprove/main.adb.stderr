@@ -1,0 +1,5 @@
+main.adb:3:11: warning: "Visited_Array" is not modified, could be INPUT[#0]
+main.adb:3:11: warning: "Count" is not modified, could be INPUT[#1]
+main.adb:19:32: side effects of function "Count_Islands" are not modeled in SPARK
+main.adb:19:32: medium: "Visited_Array" might not be initialized after elaboration of main program "Main"[#2]
+main.adb:19:32: medium: "Count" might not be initialized after elaboration of main program "Main"[#3]

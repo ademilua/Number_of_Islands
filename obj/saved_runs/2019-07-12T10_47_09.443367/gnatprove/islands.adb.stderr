@@ -1,0 +1,4 @@
+islands.adb:47:35: medium: loop invariant might fail in first iteration, cannot prove Count'Loop_Entry <= L (e.g. when Count'Loop_Entry = 1 and L = 0)[#1]
+islands.adb:52:31: medium: overflow check might fail (e.g. when Count = Natural'Last) [possible explanation: loop invariant at line 44 should mention Count][#0]
+islands.adb:64:13: medium: loop invariant might fail in first iteration, cannot prove Count <= K + L (e.g. when Count = 6 and K = 0 and L = 5) [possible explanation: loop invariant at line 44 should mention Count][#2]
+islands.adb:64:13: medium: loop invariant might fail after first iteration, cannot prove Count <= K + L (e.g. when Count = 11 and K = 5 and L = 5) [possible explanation: loop invariant at line 44 should mention Count][#3]

@@ -1,0 +1,4 @@
+islands.adb:39:31: medium: overflow check might fail[#3]
+islands.ads:34:19: medium: contract cases might not be complete[#0]
+islands.ads:34:66: medium: overflow check might fail (e.g. when I = Integer'Last)[#2]
+islands.ads:34:105: medium: contract case might fail[#1]

@@ -1,0 +1,1180 @@
+(* Module for defining the constant "default_priority" defined at system.ads:112, created in Gnat2Why.Decls.Translate_Constant *)
+module System__default_priority
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val constant default_priority [#"system.ads" 112 0 0][@name:Default_Priority] [@model_trace:7173] 
+   : int
+
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining the value of constant "default_priority" defined at system.ads:112, created in Gnat2Why.Decls.Translate_Constant_Value *)
+module System__default_priority___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        System__default_priority as System__default_priority
+
+ axiom default_priority__def_axiom :
+  ((System__default_priority.default_priority ) = (48 : int))
+
+end
+
+(* Module for axiomatizing type "int_needed" defined at islands.ads:11, created in Gnat2Why.Types.Translate_Type *)
+module Islands__int_needed
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ type int_needed =
+  < range 0 1 >
+ 
+ val constant first 
+   : int
+  ensures { result =  (0 : int) }
+ 
+ val constant last 
+   : int
+  ensures { result =  (1 : int) }
+ 
+ predicate in_range 
+   (x : int) =
+  ( (first <= x) /\ (x <= last) )
+ val in_range 
+   (x : int) : bool
+  ensures { result <-> in_range (x : int) }
+ 
+ clone export "ada__model".Static_Discrete with axiom .,
+ type t = int_needed, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type int_needed__ref =
+  { mutable int_needed__content : int_needed }
+ 
+ function int_needed__ref_int_needed__content__projection 
+   (a : int_needed__ref) : int_needed =
+  a.int_needed__content
+ 
+ meta "model_projection" function int_needed__ref_int_needed__content__projection
+ 
+ meta "inline:no" function int_needed__ref_int_needed__content__projection
+ 
+ val int_needed__havoc 
+   (x : int_needed__ref) : unit
+  writes {x}
+
+end
+
+(* Module giving axioms for type "int_needed" defined at islands.ads:11, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Islands__int_needed___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__int_needed as Islands__int_needed
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_228 : int) (temp___is_init_224 : bool) (temp___skip_constant_225 : bool) (temp___do_toplevel_226 : bool) (temp___do_typ_inv_227 : bool) =
+  (if (( temp___is_init_224 \/ (Islands__int_needed.first <= Islands__int_needed.last) )) then (
+   (Islands__int_needed.dynamic_property Islands__int_needed.first Islands__int_needed.last temp___expr_228)) else true)
+ val dynamic_invariant [@inline] 
+   (temp___expr_228 : int) (temp___is_init_224 : bool) (temp___skip_constant_225 : bool) (temp___do_toplevel_226 : bool) (temp___do_typ_inv_227 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_228 : int) (temp___is_init_224 : bool) (temp___skip_constant_225 : bool) (temp___do_toplevel_226 : bool) (temp___do_typ_inv_227 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_229 : int) (temp___skip_top_level_230 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_229 : int) (temp___skip_top_level_230 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_229 : int) (temp___skip_top_level_230 : bool) }
+
+end
+
+(* Module defining to_rep/of_rep for type "int_needed" defined at islands.ads:11, created in Gnat2Why.Types.Translate_Type *)
+module Islands__int_needed__rep
+ use        Islands__int_needed as Islands__int_needed
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ function to_rep 
+   (x : Islands__int_needed.int_needed) : int =
+  (Islands__int_needed.int_needed'int x)
+ 
+ clone export "ada__model".Rep_Proj_Int with axiom .,
+ type t = Islands__int_needed.int_needed, 
+ predicate in_range = Islands__int_needed.in_range, 
+ function to_rep = to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline:no" function to_rep
+
+end
+
+(* Module for axiomatizing the array theory associated to type "TmapB" defined at islands.ads:16, created in Why.Gen.Arrays.Create_Rep_Array_Theory *)
+module Array__Int_Int__Islands__int_needed
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__int_needed as Islands__int_needed
+ use        Islands__int_needed__rep as Islands__int_needed__rep
+
+ function index_I1_one 
+   : int =
+  (1 : int)
+ 
+ function index_I2_one 
+   : int =
+  (1 : int)
+ 
+ type component_type =
+  Islands__int_needed.int_needed
+ 
+ clone export "_gnatprove_standard".Array__2 with axiom .,
+ type I1.t = int, 
+ predicate I1.le = Int.(<=), 
+ predicate I1.lt = Int.(<), 
+ predicate I1.gt = Int.(>), 
+ function I1.add = Int.(+), 
+ function I1.sub = Int.(-), 
+ function I1.one = index_I1_one, 
+ type I2.t = int, 
+ predicate I2.le = Int.(<=), 
+ predicate I2.lt = Int.(<), 
+ predicate I2.gt = Int.(>), 
+ function I2.add = Int.(+), 
+ function I2.sub = Int.(-), 
+ function I2.one = index_I2_one, 
+ type component_type = component_type
+ 
+ function bool_eq 
+   (a : map) (a__first : int) (a__last : int) (a__first_2 : int) (a__last_2 : int) (b : map) (b__first : int) (b__last : int) (b__first_2 : int) (b__last_2 : int) : bool =
+  ( ( (if ((a__first <= a__last)) then (
+   ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+   (b__first > b__last))) /\ (if ((a__first_2 <= a__last_2)) then (
+   ( (b__first_2 <= b__last_2) /\ ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)) )) else (
+   (b__first_2 > b__last_2))) ) /\ (forall temp___idx_156   temp___idx_157   : int.
+   (if (( ( (a__first <= temp___idx_156) /\ (temp___idx_156 <= a__last) ) /\ ( (a__first_2 <= temp___idx_157) /\ (temp___idx_157 <= a__last_2) ) )) then (
+    ((Islands__int_needed__rep.to_rep (get a temp___idx_156 temp___idx_157)) = (Islands__int_needed__rep.to_rep (get b ((b__first - a__first) + temp___idx_156) ((b__first_2 - a__first_2) + temp___idx_157))))) else true)) )
+ val bool_eq 
+   (a : map) (a__first : int) (a__last : int) (a__first_2 : int) (a__last_2 : int) (b : map) (b__first : int) (b__last : int) (b__first_2 : int) (b__last_2 : int) : bool
+  ensures { result = bool_eq (a : map) (a__first : int) (a__last : int) (a__first_2 : int) (a__last_2 : int) (b : map) (b__first : int) (b__last : int) (b__first_2 : int) (b__last_2 : int) }
+ 
+ axiom bool_eq_rev :
+  (forall a   b   : map.
+  (forall a__first   a__last   a__first_2   a__last_2   b__first   b__last   b__first_2   b__last_2   : int.
+   ( ((bool_eq b b__first b__last b__first_2 b__last_2 a a__first a__last a__first_2 a__last_2) = True) -> ( ( (if ((a__first <= a__last)) then (
+    ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+    (b__first > b__last))) /\ (if ((a__first_2 <= a__last_2)) then (
+    ( (b__first_2 <= b__last_2) /\ ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)) )) else (
+    (b__first_2 > b__last_2))) ) /\ (forall temp___idx_156   temp___idx_157   : int.
+    (if (( ( (a__first <= temp___idx_156) /\ (temp___idx_156 <= a__last) ) /\ ( (a__first_2 <= temp___idx_157) /\ (temp___idx_157 <= a__last_2) ) )) then (
+     ((Islands__int_needed__rep.to_rep (get a temp___idx_156 temp___idx_157)) = (Islands__int_needed__rep.to_rep (get b ((b__first - a__first) + temp___idx_156) ((b__first_2 - a__first_2) + temp___idx_157))))) else true)) ) )))
+
+end
+
+(* Module for declaring an abstract function for the aggregate at main.adb:8, created in Gnat2Why.Expr.Transform_Aggregate.Generate_Logic_Function *)
+module Main__map_array__aggregate_def
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+
+ val function main__map_array__aggregate_def 
+   (temp___159 : int) (temp___160 : int) (temp___161 : int) (temp___162 : int) (temp___163 : int) (temp___164 : int) (temp___165 : int) (temp___166 : int) (temp___167 : int) (temp___168 : int) (temp___169 : int) (temp___170 : int) (temp___171 : int) (temp___172 : int) (temp___173 : int) (temp___174 : int) (temp___175 : int) (temp___176 : int) (temp___177 : int) (temp___178 : int) : Array__Int_Int__Islands__int_needed.map
+
+end
+
+(* Module for defining the value of the aggregate at main.adb:8, created in Gnat2Why.Expr.Transform_Aggregate.Generate_Logic_Function *)
+module Main__map_array__aggregate_def___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__int_needed as Islands__int_needed
+ use        Islands__int_needed___axiom as Islands__int_needed___axiom
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+ use        Main__map_array__aggregate_def as Main__map_array__aggregate_def
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+
+ axiom def_axiom :
+  (forall temp___159   temp___160   temp___161   temp___162   temp___163   temp___164   temp___165   temp___166   temp___167   temp___168   temp___169   temp___170   temp___171   temp___172   temp___173   temp___174   temp___175   temp___176   temp___177   temp___178   : int.
+   (let temp___158 [@mlw:proxy_symbol] [@introduced]  = (Main__map_array__aggregate_def.main__map_array__aggregate_def temp___159 temp___160 temp___161 temp___162 temp___163 temp___164 temp___165 temp___166 temp___167 temp___168 temp___169 temp___170 temp___171 temp___172 temp___173 temp___174 temp___175 temp___176 temp___177 temp___178) in (
+    (if (( ( (Islands__int_needed___axiom.dynamic_invariant temp___159 True True True True) /\ (Islands__int_needed___axiom.dynamic_invariant temp___160 True True True True) )/\( ( ( ( ( (Islands__int_needed___axiom.dynamic_invariant temp___161 True True True True)/\(Islands__int_needed___axiom.dynamic_invariant temp___162 True True True True) )/\(Islands__int_needed___axiom.dynamic_invariant temp___163 True True True True) )/\( (Islands__int_needed___axiom.dynamic_invariant temp___164 True True True True)/\(Islands__int_needed___axiom.dynamic_invariant temp___165 True True True True) ) )/\( ( (Islands__int_needed___axiom.dynamic_invariant temp___166 True True True True)/\(Islands__int_needed___axiom.dynamic_invariant temp___167 True True True True) )/\( (Islands__int_needed___axiom.dynamic_invariant temp___168 True True True True)/\(Islands__int_needed___axiom.dynamic_invariant temp___169 True True True True) ) ) )/\( ( ( ( (Islands__int_needed___axiom.dynamic_invariant temp___170 True True True True)/\(Islands__int_needed___axiom.dynamic_invariant temp___171 True True True True) )/\(Islands__int_needed___axiom.dynamic_invariant temp___172 True True True True) )/\( (Islands__int_needed___axiom.dynamic_invariant temp___173 True True True True)/\(Islands__int_needed___axiom.dynamic_invariant temp___174 True True True True) ) )/\( ( (Islands__int_needed___axiom.dynamic_invariant temp___175 True True True True)/\(Islands__int_needed___axiom.dynamic_invariant temp___176 True True True True) )/\( (Islands__int_needed___axiom.dynamic_invariant temp___177 True True True True)/\(Islands__int_needed___axiom.dynamic_invariant temp___178 True True True True) ) ) ) ) )) then (
+     ( ( ( ( ((Array__Int_Int__Islands__int_needed.get temp___158 (1 : int) (1 : int)) = ( 1 : Islands__int_needed.int_needed )) /\ ((Array__Int_Int__Islands__int_needed.get temp___158 (1 : int) (2 : int)) = ( 0 : Islands__int_needed.int_needed )) )/\( ( ((Array__Int_Int__Islands__int_needed.get temp___158 (1 : int) (3 : int)) = ( 1 : Islands__int_needed.int_needed ))/\((Array__Int_Int__Islands__int_needed.get temp___158 (1 : int) (4 : int)) = ( 0 : Islands__int_needed.int_needed )) )/\((Array__Int_Int__Islands__int_needed.get temp___158 (1 : int) (5 : int)) = ( 0 : Islands__int_needed.int_needed )) ) ) /\ ( ( ((Array__Int_Int__Islands__int_needed.get temp___158 (2 : int) (1 : int)) = ( 0 : Islands__int_needed.int_needed )) /\ ((Array__Int_Int__Islands__int_needed.get temp___158 (2 : int) (2 : int)) = ( 0 : Islands__int_needed.int_needed )) )/\( ( ((Array__Int_Int__Islands__int_needed.get temp___158 (2 : int) (3 : int)) = ( 0 : Islands__int_needed.int_needed ))/\((Array__Int_Int__Islands__int_needed.get temp___158 (2 : int) (4 : int)) = ( 1 : Islands__int_needed.int_needed )) )/\((Array__Int_Int__Islands__int_needed.get temp___158 (2 : int) (5 : int)) = ( 0 : Islands__int_needed.int_needed )) ) ) )/\( ( ( ((Array__Int_Int__Islands__int_needed.get temp___158 (3 : int) (1 : int)) = ( 1 : Islands__int_needed.int_needed )) /\ ((Array__Int_Int__Islands__int_needed.get temp___158 (3 : int) (2 : int)) = ( 0 : Islands__int_needed.int_needed )) )/\( ( ((Array__Int_Int__Islands__int_needed.get temp___158 (3 : int) (3 : int)) = ( 1 : Islands__int_needed.int_needed ))/\((Array__Int_Int__Islands__int_needed.get temp___158 (3 : int) (4 : int)) = ( 1 : Islands__int_needed.int_needed )) )/\((Array__Int_Int__Islands__int_needed.get temp___158 (3 : int) (5 : int)) = ( 0 : Islands__int_needed.int_needed )) ) )/\( ( ((Array__Int_Int__Islands__int_needed.get temp___158 (4 : int) (1 : int)) = ( 0 : Islands__int_needed.int_needed )) /\ ((Array__Int_Int__Islands__int_needed.get temp___158 (4 : int) (2 : int)) = ( 1 : Islands__int_needed.int_needed )) )/\( ( ((Array__Int_Int__Islands__int_needed.get temp___158 (4 : int) (3 : int)) = ( 1 : Islands__int_needed.int_needed ))/\((Array__Int_Int__Islands__int_needed.get temp___158 (4 : int) (4 : int)) = ( 1 : Islands__int_needed.int_needed )) )/\((Array__Int_Int__Islands__int_needed.get temp___158 (4 : int) (5 : int)) = ( 0 : Islands__int_needed.int_needed )) ) ) ) )) else true)))
+  )
+
+end
+
+(* Module for defining the constant "map_array" defined at main.adb:8, created in Gnat2Why.Decls.Translate_Constant *)
+module Main__map_array
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+
+ val constant map_array [#"main.adb" 8 0 0][@model_trace:2328] [@model_projected] [@name:Map_Array] 
+   : Array__Int_Int__Islands__int_needed.map
+
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining the value of constant "map_array" defined at main.adb:8, created in Gnat2Why.Decls.Translate_Constant_Value *)
+module Main__map_array___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Main__map_array as Main__map_array
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+ use        Main__map_array__aggregate_def as Main__map_array__aggregate_def
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+
+ axiom map_array__def_axiom :
+  ((Main__map_array.map_array ) = (Main__map_array__aggregate_def.main__map_array__aggregate_def (1 : int) (0 : int) (1 : int) (0 : int) (0 : int) (0 : int) (0 : int) (0 : int) (1 : int) (0 : int) (1 : int) (0 : int) (1 : int) (1 : int) (0 : int) (0 : int) (1 : int) (1 : int) (1 : int) (0 : int)))
+
+end
+
+(* Module for possibly declaring a logic function for "line_length__2" defined at a-textio.ads:245, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Ada___ada__text_io__line_length__2
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "_gnatprove_standard".Main as Main
+
+ val function line_length__2 
+   (ada___ada__text_io__standard_in : Main.__private) (ada___ada__text_io__file_system : Main.__private) (ada___ada__text_io__standard_out : Main.__private) (ada___ada__text_io__standard_err : Main.__private) (ada___ada__text_io__current_in : Main.__private) (ada___ada__text_io__current_out : Main.__private) (ada___ada__text_io__current_err : Main.__private) : int
+ 
+ val predicate line_length__2__function_guard 
+   (temp___result_154 : int) (ada___ada__text_io__standard_in : Main.__private) (ada___ada__text_io__file_system : Main.__private) (ada___ada__text_io__standard_out : Main.__private) (ada___ada__text_io__standard_err : Main.__private) (ada___ada__text_io__current_in : Main.__private) (ada___ada__text_io__current_out : Main.__private) (ada___ada__text_io__current_err : Main.__private)
+
+end
+
+(* Module for axiomatizing type "count" defined at a-textio.ads:77, created in Gnat2Why.Types.Translate_Type *)
+module Ada___ada__text_io__count
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ type count =
+  < range 0 2147483647 >
+ 
+ val constant first 
+   : int
+  ensures { result =  (0 : int) }
+ 
+ val constant last 
+   : int
+  ensures { result =  (2147483647 : int) }
+ 
+ predicate in_range 
+   (x : int) =
+  ( (first <= x) /\ (x <= last) )
+ val in_range 
+   (x : int) : bool
+  ensures { result <-> in_range (x : int) }
+ 
+ clone export "ada__model".Static_Discrete with axiom .,
+ type t = count, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type count__ref =
+  { mutable count__content : count }
+ 
+ function count__ref_count__content__projection 
+   (a : count__ref) : count =
+  a.count__content
+ 
+ meta "model_projection" function count__ref_count__content__projection
+ 
+ meta "inline:no" function count__ref_count__content__projection
+ 
+ val count__havoc 
+   (x : count__ref) : unit
+  writes {x}
+
+end
+
+(* Module giving axioms for type "count" defined at a-textio.ads:77, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Ada___ada__text_io__count___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Ada___ada__text_io__count as Ada___ada__text_io__count
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_186 : int) (temp___is_init_182 : bool) (temp___skip_constant_183 : bool) (temp___do_toplevel_184 : bool) (temp___do_typ_inv_185 : bool) =
+  (if (( temp___is_init_182 \/ (Ada___ada__text_io__count.first <= Ada___ada__text_io__count.last) )) then (
+   (Ada___ada__text_io__count.dynamic_property Ada___ada__text_io__count.first Ada___ada__text_io__count.last temp___expr_186)) else true)
+ val dynamic_invariant [@inline] 
+   (temp___expr_186 : int) (temp___is_init_182 : bool) (temp___skip_constant_183 : bool) (temp___do_toplevel_184 : bool) (temp___do_typ_inv_185 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_186 : int) (temp___is_init_182 : bool) (temp___skip_constant_183 : bool) (temp___do_toplevel_184 : bool) (temp___do_typ_inv_185 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_187 : int) (temp___skip_top_level_188 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_187 : int) (temp___skip_top_level_188 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_187 : int) (temp___skip_top_level_188 : bool) }
+
+end
+
+(* Module declaring the external object "ada___ada__text_io__standard_in," created in Gnat2Why.Decls.Translate_External_Object *)
+module Ada___ada__text_io__standard_in
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val standard_in  : Main.__private__ref 
+
+end
+
+(* Module declaring the external object "ada___ada__text_io__file_system," created in Gnat2Why.Decls.Translate_External_Object *)
+module Ada___ada__text_io__file_system
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val file_system  : Main.__private__ref 
+
+end
+
+(* Module declaring the external object "ada___ada__text_io__standard_out," created in Gnat2Why.Decls.Translate_External_Object *)
+module Ada___ada__text_io__standard_out
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val standard_out  : Main.__private__ref 
+
+end
+
+(* Module declaring the external object "ada___ada__text_io__standard_err," created in Gnat2Why.Decls.Translate_External_Object *)
+module Ada___ada__text_io__standard_err
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val standard_err  : Main.__private__ref 
+
+end
+
+(* Module declaring the external object "ada___ada__text_io__current_in," created in Gnat2Why.Decls.Translate_External_Object *)
+module Ada___ada__text_io__current_in
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val current_in  : Main.__private__ref 
+
+end
+
+(* Module declaring the external object "ada___ada__text_io__current_out," created in Gnat2Why.Decls.Translate_External_Object *)
+module Ada___ada__text_io__current_out
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val current_out  : Main.__private__ref 
+
+end
+
+(* Module declaring the external object "ada___ada__text_io__current_err," created in Gnat2Why.Decls.Translate_External_Object *)
+module Ada___ada__text_io__current_err
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val current_err  : Main.__private__ref 
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "line_length__2" defined at a-textio.ads:245, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Ada___ada__text_io__line_length__2___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "_gnatprove_standard".Main as Main
+ use        Ada___ada__text_io__line_length__2 as Ada___ada__text_io__line_length__2
+ use        Ada___ada__text_io__count___axiom as Ada___ada__text_io__count___axiom
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+
+ val line_length__2 
+   (__void_param : unit) : int
+  requires {  true }
+  ensures {  ( ( (result = (Ada___ada__text_io__line_length__2.line_length__2 Ada___ada__text_io__standard_in.standard_in.Main.__private__content Ada___ada__text_io__file_system.file_system.Main.__private__content Ada___ada__text_io__standard_out.standard_out.Main.__private__content Ada___ada__text_io__standard_err.standard_err.Main.__private__content Ada___ada__text_io__current_in.current_in.Main.__private__content Ada___ada__text_io__current_out.current_out.Main.__private__content Ada___ada__text_io__current_err.current_err.Main.__private__content)) /\ true )/\(Ada___ada__text_io__count___axiom.dynamic_invariant result True False True True) ) }
+  reads {Ada___ada__text_io__standard_in.standard_in, Ada___ada__text_io__file_system.file_system, Ada___ada__text_io__standard_out.standard_out, Ada___ada__text_io__standard_err.standard_err, Ada___ada__text_io__current_in.current_in, Ada___ada__text_io__current_out.current_out, Ada___ada__text_io__current_err.current_err}
+ 
+ axiom line_length__2__post_axiom :
+  (forall ada___ada__text_io__standard_in   ada___ada__text_io__file_system   ada___ada__text_io__standard_out   ada___ada__text_io__standard_err   ada___ada__text_io__current_in   ada___ada__text_io__current_out   ada___ada__text_io__current_err   : Main.__private [(Ada___ada__text_io__line_length__2.line_length__2 ada___ada__text_io__standard_in ada___ada__text_io__file_system ada___ada__text_io__standard_out ada___ada__text_io__standard_err ada___ada__text_io__current_in ada___ada__text_io__current_out ada___ada__text_io__current_err)].
+   ( true -> (let result  = (Ada___ada__text_io__line_length__2.line_length__2 ada___ada__text_io__standard_in ada___ada__text_io__file_system ada___ada__text_io__standard_out ada___ada__text_io__standard_err ada___ada__text_io__current_in ada___ada__text_io__current_out ada___ada__text_io__current_err) in (
+    ( ( true /\ (Ada___ada__text_io__count___axiom.dynamic_invariant result True False True True) )/\true )))
+    ))
+
+end
+
+(* Module for possibly declaring a logic function for "page_length__2" defined at a-textio.ads:251, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Ada___ada__text_io__page_length__2
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "_gnatprove_standard".Main as Main
+
+ val function page_length__2 
+   (ada___ada__text_io__standard_in : Main.__private) (ada___ada__text_io__file_system : Main.__private) (ada___ada__text_io__standard_out : Main.__private) (ada___ada__text_io__standard_err : Main.__private) (ada___ada__text_io__current_in : Main.__private) (ada___ada__text_io__current_out : Main.__private) (ada___ada__text_io__current_err : Main.__private) : int
+ 
+ val predicate page_length__2__function_guard 
+   (temp___result_155 : int) (ada___ada__text_io__standard_in : Main.__private) (ada___ada__text_io__file_system : Main.__private) (ada___ada__text_io__standard_out : Main.__private) (ada___ada__text_io__standard_err : Main.__private) (ada___ada__text_io__current_in : Main.__private) (ada___ada__text_io__current_out : Main.__private) (ada___ada__text_io__current_err : Main.__private)
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "page_length__2" defined at a-textio.ads:251, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Ada___ada__text_io__page_length__2___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "_gnatprove_standard".Main as Main
+ use        Ada___ada__text_io__page_length__2 as Ada___ada__text_io__page_length__2
+ use        Ada___ada__text_io__count___axiom as Ada___ada__text_io__count___axiom
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+
+ val page_length__2 
+   (__void_param : unit) : int
+  requires {  true }
+  ensures {  ( ( (result = (Ada___ada__text_io__page_length__2.page_length__2 Ada___ada__text_io__standard_in.standard_in.Main.__private__content Ada___ada__text_io__file_system.file_system.Main.__private__content Ada___ada__text_io__standard_out.standard_out.Main.__private__content Ada___ada__text_io__standard_err.standard_err.Main.__private__content Ada___ada__text_io__current_in.current_in.Main.__private__content Ada___ada__text_io__current_out.current_out.Main.__private__content Ada___ada__text_io__current_err.current_err.Main.__private__content)) /\ true )/\(Ada___ada__text_io__count___axiom.dynamic_invariant result True False True True) ) }
+  reads {Ada___ada__text_io__standard_in.standard_in, Ada___ada__text_io__file_system.file_system, Ada___ada__text_io__standard_out.standard_out, Ada___ada__text_io__standard_err.standard_err, Ada___ada__text_io__current_in.current_in, Ada___ada__text_io__current_out.current_out, Ada___ada__text_io__current_err.current_err}
+ 
+ axiom page_length__2__post_axiom :
+  (forall ada___ada__text_io__standard_in   ada___ada__text_io__file_system   ada___ada__text_io__standard_out   ada___ada__text_io__standard_err   ada___ada__text_io__current_in   ada___ada__text_io__current_out   ada___ada__text_io__current_err   : Main.__private [(Ada___ada__text_io__page_length__2.page_length__2 ada___ada__text_io__standard_in ada___ada__text_io__file_system ada___ada__text_io__standard_out ada___ada__text_io__standard_err ada___ada__text_io__current_in ada___ada__text_io__current_out ada___ada__text_io__current_err)].
+   ( true -> (let result  = (Ada___ada__text_io__page_length__2.page_length__2 ada___ada__text_io__standard_in ada___ada__text_io__file_system ada___ada__text_io__standard_out ada___ada__text_io__standard_err ada___ada__text_io__current_in ada___ada__text_io__current_out ada___ada__text_io__current_err) in (
+    ( ( true /\ (Ada___ada__text_io__count___axiom.dynamic_invariant result True False True True) )/\true )))
+    ))
+
+end
+
+(* Module declaring the external object "islands__water," created in Gnat2Why.Decls.Translate_External_Object *)
+module Islands__water
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val water  : Main.__private__ref 
+
+end
+
+(* Module declaring the external object "islands__land," created in Gnat2Why.Decls.Translate_External_Object *)
+module Islands__land
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val land  : Main.__private__ref 
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "main" defined at main.adb:3, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Main___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+ use        Islands__water as Islands__water
+ use        Islands__land as Islands__land
+
+ val main 
+   (__void_param : unit) : unit
+  requires {  true }
+  ensures {  true }
+  reads {Ada___ada__text_io__standard_in.standard_in, Ada___ada__text_io__file_system.file_system, Ada___ada__text_io__standard_out.standard_out, Ada___ada__text_io__standard_err.standard_err, Ada___ada__text_io__current_in.current_in, Ada___ada__text_io__current_out.current_out, Ada___ada__text_io__current_err.current_err, Islands__water.water, Islands__land.land}
+  writes {Ada___ada__text_io__standard_in.standard_in, Ada___ada__text_io__file_system.file_system, Ada___ada__text_io__standard_out.standard_out, Ada___ada__text_io__standard_err.standard_err, Ada___ada__text_io__current_in.current_in, Ada___ada__text_io__current_out.current_out, Ada___ada__text_io__current_err.current_err}
+
+end
+
+(* Module for axiomatizing type "integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ type integer =
+  < range -2147483648 2147483647 >
+ 
+ val constant first 
+   : int
+  ensures { result =  (( -2147483648) : int) }
+ 
+ val constant last 
+   : int
+  ensures { result =  (2147483647 : int) }
+ 
+ predicate in_range 
+   (x : int) =
+  ( (first <= x) /\ (x <= last) )
+ val in_range 
+   (x : int) : bool
+  ensures { result <-> in_range (x : int) }
+ 
+ clone export "ada__model".Static_Discrete with axiom .,
+ type t = integer, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type integer__ref =
+  { mutable integer__content : integer }
+ 
+ function integer__ref_integer__content__projection 
+   (a : integer__ref) : integer =
+  a.integer__content
+ 
+ meta "model_projection" function integer__ref_integer__content__projection
+ 
+ meta "inline:no" function integer__ref_integer__content__projection
+ 
+ val integer__havoc 
+   (x : integer__ref) : unit
+  writes {x}
+
+end
+
+(* Module giving axioms for type "integer", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__integer___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Standard__integer as Standard__integer
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_18 : int) (temp___is_init_14 : bool) (temp___skip_constant_15 : bool) (temp___do_toplevel_16 : bool) (temp___do_typ_inv_17 : bool) =
+  (if (( temp___is_init_14 \/ (Standard__integer.first <= Standard__integer.last) )) then (
+   (Standard__integer.dynamic_property Standard__integer.first Standard__integer.last temp___expr_18)) else true)
+ val dynamic_invariant [@inline] 
+   (temp___expr_18 : int) (temp___is_init_14 : bool) (temp___skip_constant_15 : bool) (temp___do_toplevel_16 : bool) (temp___do_typ_inv_17 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_18 : int) (temp___is_init_14 : bool) (temp___skip_constant_15 : bool) (temp___do_toplevel_16 : bool) (temp___do_typ_inv_17 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_19 : int) (temp___skip_top_level_20 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_19 : int) (temp___skip_top_level_20 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_19 : int) (temp___skip_top_level_20 : bool) }
+
+end
+
+(* Module for possibly declaring a logic function for "count_islands" defined at islands.ads:35, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Islands__count_islands
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "_gnatprove_standard".Main as Main
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+
+ val function count_islands 
+   (map_array : Array__Int_Int__Islands__int_needed.map) (islands__water : Main.__private) (islands__land : Main.__private) : int
+ 
+ val predicate count_islands__function_guard 
+   (temp___result_181 : int) (map_array : Array__Int_Int__Islands__int_needed.map) (islands__water : Main.__private) (islands__land : Main.__private)
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "count_islands" defined at islands.ads:35, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Islands__count_islands___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        "_gnatprove_standard".Main as Main
+ use        Standard__integer as Standard__integer
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Islands__count_islands as Islands__count_islands
+ use        Islands__int_needed as Islands__int_needed
+ use        Islands__int_needed__rep as Islands__int_needed__rep
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+ use        Islands__water as Islands__water
+ use        Islands__land as Islands__land
+ use        Islands__water as Islands__water
+ use        Islands__land as Islands__land
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+
+ val count_islands 
+   (map_array : Array__Int_Int__Islands__int_needed.map) : int
+  requires {  (exists i  : int.
+   ( ( ((1 : int) <= i) /\ (i <= (4 : int)) ) /\ (exists j  : int.
+    ( ( ((1 : int) <= j) /\ (j <= (4 : int)) ) /\ ( [@GP_Pretty_Ada:12764] ((Islands__int_needed__rep.to_rep (Array__Int_Int__Islands__int_needed.get map_array i j)) = (1 : int)) ) )) )) }
+  ensures {  ( ( (result = (Islands__count_islands.count_islands map_array Islands__water.water.Main.__private__content Islands__land.land.Main.__private__content)) /\ (Islands__count_islands.count_islands__function_guard result map_array Islands__water.water.Main.__private__content Islands__land.land.Main.__private__content) )/\(Standard__integer___axiom.dynamic_invariant result True False True True) ) }
+  reads {Islands__water.water, Islands__land.land}
+ 
+ axiom count_islands__post_axiom :
+  (forall map_array   : Array__Int_Int__Islands__int_needed.map.
+  (forall islands__water   islands__land   : Main.__private [(Islands__count_islands.count_islands map_array islands__water islands__land)].
+   (let result  = (Islands__count_islands.count_islands map_array islands__water islands__land) in (
+    (Standard__integer.dynamic_property Standard__integer.first Standard__integer.last result)))
+  ))
+
+end
+
+(* Module for axiomatizing type "positive", created in Gnat2Why.Types.Translate_Type *)
+module Standard__positive
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ type positive =
+  < range 1 2147483647 >
+ 
+ val constant first 
+   : int
+  ensures { result =  (1 : int) }
+ 
+ val constant last 
+   : int
+  ensures { result =  (2147483647 : int) }
+ 
+ predicate in_range 
+   (x : int) =
+  ( (first <= x) /\ (x <= last) )
+ val in_range 
+   (x : int) : bool
+  ensures { result <-> in_range (x : int) }
+ 
+ clone export "ada__model".Static_Discrete with axiom .,
+ type t = positive, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type positive__ref =
+  { mutable positive__content : positive }
+ 
+ function positive__ref_positive__content__projection 
+   (a : positive__ref) : positive =
+  a.positive__content
+ 
+ meta "model_projection" function positive__ref_positive__content__projection
+ 
+ meta "inline:no" function positive__ref_positive__content__projection
+ 
+ val positive__havoc 
+   (x : positive__ref) : unit
+  writes {x}
+
+end
+
+(* Module for axiomatizing type "character", created in Gnat2Why.Types.Translate_Type *)
+module Standard__character
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ type character 
+ 
+ val constant first 
+   : int
+  ensures { result =  (0 : int) }
+ 
+ val constant last 
+   : int
+  ensures { result =  (255 : int) }
+ 
+ predicate in_range 
+   (x : int) =
+  ( (first <= x) /\ (x <= last) )
+ val in_range 
+   (x : int) : bool
+  ensures { result <-> in_range (x : int) }
+ 
+ clone export "ada__model".Static_Discrete with axiom .,
+ type t = character, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type character__ref =
+  { mutable character__content : character }
+ 
+ function character__ref_character__content__projection 
+   (a : character__ref) : character =
+  a.character__content
+ 
+ meta "model_projection" function character__ref_character__content__projection
+ 
+ meta "inline:no" function character__ref_character__content__projection
+ 
+ val character__havoc 
+   (x : character__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "character", created in Gnat2Why.Types.Translate_Type *)
+module Standard__character__rep
+ use        Standard__character as Standard__character
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ clone export "ada__model".Rep_Proj_Int with axiom .,
+ type t = Standard__character.character, 
+ predicate in_range = Standard__character.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline:no" function to_rep
+
+end
+
+(* Module for axiomatizing the array theory associated to type "string", created in Why.Gen.Arrays.Create_Rep_Array_Theory *)
+module Array__Int__Standard__character
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Standard__character as Standard__character
+ use        Standard__character__rep as Standard__character__rep
+
+ function index_I1_one 
+   : int =
+  (1 : int)
+ 
+ type component_type =
+  Standard__character.character
+ 
+ clone export "_gnatprove_standard".Array__1 with axiom .,
+ type I1.t = int, 
+ predicate I1.le = Int.(<=), 
+ predicate I1.lt = Int.(<), 
+ predicate I1.gt = Int.(>), 
+ function I1.add = Int.(+), 
+ function I1.sub = Int.(-), 
+ function I1.one = index_I1_one, 
+ type component_type = component_type
+ 
+ function bool_eq 
+   (a : map) (a__first : int) (a__last : int) (b : map) (b__first : int) (b__last : int) : bool =
+  ( (if ((a__first <= a__last)) then (
+   ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+   (b__first > b__last))) /\ (forall temp___idx_91   : int.
+   (if (( (a__first <= temp___idx_91) /\ (temp___idx_91 <= a__last) )) then (
+    ((Standard__character__rep.to_rep (get a temp___idx_91)) = (Standard__character__rep.to_rep (get b ((b__first - a__first) + temp___idx_91))))) else true)) )
+ val bool_eq 
+   (a : map) (a__first : int) (a__last : int) (b : map) (b__first : int) (b__last : int) : bool
+  ensures { result = bool_eq (a : map) (a__first : int) (a__last : int) (b : map) (b__first : int) (b__last : int) }
+ 
+ axiom bool_eq_rev :
+  (forall a   b   : map.
+  (forall a__first   a__last   b__first   b__last   : int.
+   ( ((bool_eq b b__first b__last a a__first a__last) = True) -> ( (if ((a__first <= a__last)) then (
+    ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+    (b__first > b__last))) /\ (forall temp___idx_91   : int.
+    (if (( (a__first <= temp___idx_91) /\ (temp___idx_91 <= a__last) )) then (
+     ((Standard__character__rep.to_rep (get a temp___idx_91)) = (Standard__character__rep.to_rep (get b ((b__first - a__first) + temp___idx_91))))) else true)) ) )))
+
+end
+
+(* Module defining to_rep/of_rep for type "integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer__rep
+ use        Standard__integer as Standard__integer
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ function to_rep 
+   (x : Standard__integer.integer) : int =
+  (Standard__integer.integer'int x)
+ 
+ clone export "ada__model".Rep_Proj_Int with axiom .,
+ type t = Standard__integer.integer, 
+ predicate in_range = Standard__integer.in_range, 
+ function to_rep = to_rep
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline:no" function to_rep
+
+end
+
+(* Module for axiomatizing type "string", created in Gnat2Why.Types.Translate_Type *)
+module Standard__string
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Standard__integer as Standard__integer
+ use        Standard__positive as Standard__positive
+ use        Standard__character as Standard__character
+ use        Array__Int__Standard__character as Array__Int__Standard__character
+ use        Standard__integer__rep as Standard__integer__rep
+
+ type component_type =
+  Standard__character.character
+ 
+ function index_1_id 
+   (x : int) : int =
+  x
+ 
+ clone export "ada__model".Unconstr_Array with axiom .,
+ type map = Array__Int__Standard__character.map, 
+ function array_bool_eq = Array__Int__Standard__character.bool_eq, 
+ type index_base_type = Standard__integer.integer, 
+ type index_rep_type = int, 
+ function to_rep = Standard__integer__rep.to_rep, 
+ function rep_to_int = index_1_id, 
+ predicate in_range_base = Standard__integer.in_range, 
+ predicate index_dynamic_property = Standard__positive.dynamic_property, 
+ predicate index_rep_le = Int.(<=)
+ 
+ type string =
+  __t
+ 
+ meta "model_projection" function to_array
+ 
+ meta "inline:no" function to_array
+ 
+ meta "model_projection" function first
+ 
+ meta "inline:no" function first
+ 
+ meta "model_projection" function last
+ 
+ meta "inline:no" function last
+ 
+ type string__ref =
+  { mutable string__content : string }
+ 
+ function string__ref_string__content__projection 
+   (a : string__ref) : string =
+  a.string__content
+ 
+ meta "model_projection" function string__ref_string__content__projection
+ 
+ meta "inline:no" function string__ref_string__content__projection
+ 
+ val string__havoc 
+   (x : string__ref) : unit
+  writes {x}
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "put_line__2" defined at a-textio.ads:508, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Ada___ada__text_io__put_line__2___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "_gnatprove_standard".Main as Main
+ use        Standard__string as Standard__string
+ use        Ada___ada__text_io__line_length__2 as Ada___ada__text_io__line_length__2
+ use        Ada___ada__text_io__page_length__2 as Ada___ada__text_io__page_length__2
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+ use        Ada___ada__text_io__standard_in as Ada___ada__text_io__standard_in
+ use        Ada___ada__text_io__file_system as Ada___ada__text_io__file_system
+ use        Ada___ada__text_io__standard_out as Ada___ada__text_io__standard_out
+ use        Ada___ada__text_io__standard_err as Ada___ada__text_io__standard_err
+ use        Ada___ada__text_io__current_in as Ada___ada__text_io__current_in
+ use        Ada___ada__text_io__current_out as Ada___ada__text_io__current_out
+ use        Ada___ada__text_io__current_err as Ada___ada__text_io__current_err
+
+ val put_line__2 
+   (item : Standard__string.string) : unit
+  requires {  true }
+  ensures {  ( ( [@GP_Pretty_Ada:5737] ((old (Ada___ada__text_io__line_length__2.line_length__2 Ada___ada__text_io__standard_in.standard_in.Main.__private__content Ada___ada__text_io__file_system.file_system.Main.__private__content Ada___ada__text_io__standard_out.standard_out.Main.__private__content Ada___ada__text_io__standard_err.standard_err.Main.__private__content Ada___ada__text_io__current_in.current_in.Main.__private__content Ada___ada__text_io__current_out.current_out.Main.__private__content Ada___ada__text_io__current_err.current_err.Main.__private__content) ) = (Ada___ada__text_io__line_length__2.line_length__2 Ada___ada__text_io__standard_in.standard_in.Main.__private__content Ada___ada__text_io__file_system.file_system.Main.__private__content Ada___ada__text_io__standard_out.standard_out.Main.__private__content Ada___ada__text_io__standard_err.standard_err.Main.__private__content Ada___ada__text_io__current_in.current_in.Main.__private__content Ada___ada__text_io__current_out.current_out.Main.__private__content Ada___ada__text_io__current_err.current_err.Main.__private__content)) ) /\ ( [@GP_Pretty_Ada:5743] ((old (Ada___ada__text_io__page_length__2.page_length__2 Ada___ada__text_io__standard_in.standard_in.Main.__private__content Ada___ada__text_io__file_system.file_system.Main.__private__content Ada___ada__text_io__standard_out.standard_out.Main.__private__content Ada___ada__text_io__standard_err.standard_err.Main.__private__content Ada___ada__text_io__current_in.current_in.Main.__private__content Ada___ada__text_io__current_out.current_out.Main.__private__content Ada___ada__text_io__current_err.current_err.Main.__private__content) ) = (Ada___ada__text_io__page_length__2.page_length__2 Ada___ada__text_io__standard_in.standard_in.Main.__private__content Ada___ada__text_io__file_system.file_system.Main.__private__content Ada___ada__text_io__standard_out.standard_out.Main.__private__content Ada___ada__text_io__standard_err.standard_err.Main.__private__content Ada___ada__text_io__current_in.current_in.Main.__private__content Ada___ada__text_io__current_out.current_out.Main.__private__content Ada___ada__text_io__current_err.current_err.Main.__private__content)) ) ) }
+  reads {Ada___ada__text_io__standard_in.standard_in, Ada___ada__text_io__file_system.file_system, Ada___ada__text_io__standard_out.standard_out, Ada___ada__text_io__standard_err.standard_err, Ada___ada__text_io__current_in.current_in, Ada___ada__text_io__current_out.current_out, Ada___ada__text_io__current_err.current_err}
+  writes {Ada___ada__text_io__standard_in.standard_in, Ada___ada__text_io__file_system.file_system, Ada___ada__text_io__standard_out.standard_out, Ada___ada__text_io__standard_err.standard_err, Ada___ada__text_io__current_in.current_in, Ada___ada__text_io__current_out.current_out, Ada___ada__text_io__current_err.current_err}
+
+end
+
+(* Module defining to_string/of_string functions, created in Gnat2Why.Types.Translate_Type *)
+module Standard_String__Img
+ use        "int".Int
+ use        Standard__string as Standard__string
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val function to_string 
+   (x : Main.__image) (s : int) : Standard__string.string
+ 
+ val function from_string 
+   (x : Standard__string.string) : Main.__image
+ 
+ axiom to_string__first :
+  (forall x   : Main.__image.
+  (forall s   : int [(to_string x s)].
+   ((Standard__string.first (to_string x s)) = (1 : int))))
+ 
+ axiom to_string__length :
+  (forall x   : Main.__image.
+  (forall s   : int [(to_string x s)].
+   ( (s >= (0 : int)) -> ((Standard__string.length (to_string x s)) <= s) )))
+
+end
+
+(* Module for axiomatizing concatenation for the array theory associated to type "string", created in Why.Gen.Arrays.Declare_Concatenation_Symbols *)
+module Array__Int__Standard__character__Concat
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Array__Int__Standard__character as Array__Int__Standard__character
+
+ function index_Index_one 
+   : int =
+  (1 : int)
+ 
+ clone export "_gnatprove_standard".Array__1__Concat with axiom .,
+ type component_type = Array__Int__Standard__character.component_type, 
+ type map = Array__Int__Standard__character.map, 
+ type Index.t = int, 
+ predicate Index.le = Int.(<=), 
+ predicate Index.lt = Int.(<), 
+ predicate Index.gt = Int.(>), 
+ function Index.add = Int.(+), 
+ function Index.sub = Int.(-), 
+ function Index.one = index_Index_one, 
+ function get = Array__Int__Standard__character.get
+
+end
+
+(* Module giving axioms for type "map" defined at islands.ads:16, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Islands__map___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_235 : Array__Int_Int__Islands__int_needed.map) (temp___is_init_231 : bool) (temp___skip_constant_232 : bool) (temp___do_toplevel_233 : bool) (temp___do_typ_inv_234 : bool) =
+  true
+ val dynamic_invariant [@inline] 
+   (temp___expr_235 : Array__Int_Int__Islands__int_needed.map) (temp___is_init_231 : bool) (temp___skip_constant_232 : bool) (temp___do_toplevel_233 : bool) (temp___do_typ_inv_234 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_235 : Array__Int_Int__Islands__int_needed.map) (temp___is_init_231 : bool) (temp___skip_constant_232 : bool) (temp___do_toplevel_233 : bool) (temp___do_typ_inv_234 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_238 : Array__Int_Int__Islands__int_needed.map) (temp___skip_top_level_239 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_238 : Array__Int_Int__Islands__int_needed.map) (temp___skip_top_level_239 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_238 : Array__Int_Int__Islands__int_needed.map) (temp___skip_top_level_239 : bool) }
+
+end
+
+(* Module for defining a value for string literal  defined at main.adb:14, created in Gnat2Why.Expr.Transform_String_Literal *)
+module Temp___String_Literal_246
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Standard__character as Standard__character
+ use        Standard__character__rep as Standard__character__rep
+ use        Array__Int__Standard__character as Array__Int__Standard__character
+ use        Array__Int__Standard__character as Array__Int__Standard__character
+
+ val function temp___String_Literal_246 
+   (__void_param : unit) : Array__Int__Standard__character.map
+ 
+ axiom temp___String_Literal_246__def_axiom :
+  (forall __void_param   : unit [(temp___String_Literal_246 __void_param)].
+   ( ( ((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (1 : int))) = (84 : int)) /\ ((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (2 : int))) = (104 : int)) )/\( ( ( ( ((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (3 : int))) = (101 : int))/\((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (4 : int))) = (32 : int)) )/\((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (5 : int))) = (114 : int)) )/\( ( ((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (6 : int))) = (101 : int))/\((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (7 : int))) = (115 : int)) )/\((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (8 : int))) = (117 : int)) ) )/\( ( ( ((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (9 : int))) = (108 : int))/\((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (10 : int))) = (116 : int)) )/\((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (11 : int))) = (32 : int)) )/\( ( ((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (12 : int))) = (105 : int))/\((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (13 : int))) = (115 : int)) )/\((Standard__character__rep.to_rep (Array__Int__Standard__character.get (temp___String_Literal_246 __void_param) (14 : int))) = (58 : int)) ) ) ) ))
+
+end
+
+(* Module giving axioms for type "positive", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__positive___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Standard__positive as Standard__positive
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_46 : int) (temp___is_init_42 : bool) (temp___skip_constant_43 : bool) (temp___do_toplevel_44 : bool) (temp___do_typ_inv_45 : bool) =
+  (if (( temp___is_init_42 \/ (Standard__positive.first <= Standard__positive.last) )) then (
+   (Standard__positive.dynamic_property Standard__positive.first Standard__positive.last temp___expr_46)) else true)
+ val dynamic_invariant [@inline] 
+   (temp___expr_46 : int) (temp___is_init_42 : bool) (temp___skip_constant_43 : bool) (temp___do_toplevel_44 : bool) (temp___do_typ_inv_45 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_46 : int) (temp___is_init_42 : bool) (temp___skip_constant_43 : bool) (temp___do_toplevel_44 : bool) (temp___do_typ_inv_45 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_47 : int) (temp___skip_top_level_48 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_47 : int) (temp___skip_top_level_48 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_47 : int) (temp___skip_top_level_48 : bool) }
+
+end
+
+(* Module giving axioms for type "character", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__character___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Standard__character as Standard__character
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_74 : int) (temp___is_init_70 : bool) (temp___skip_constant_71 : bool) (temp___do_toplevel_72 : bool) (temp___do_typ_inv_73 : bool) =
+  (if (( temp___is_init_70 \/ (Standard__character.first <= Standard__character.last) )) then (
+   (Standard__character.dynamic_property Standard__character.first Standard__character.last temp___expr_74)) else true)
+ val dynamic_invariant [@inline] 
+   (temp___expr_74 : int) (temp___is_init_70 : bool) (temp___skip_constant_71 : bool) (temp___do_toplevel_72 : bool) (temp___do_typ_inv_73 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_74 : int) (temp___is_init_70 : bool) (temp___skip_constant_71 : bool) (temp___do_toplevel_72 : bool) (temp___do_typ_inv_73 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_75 : int) (temp___skip_top_level_76 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_75 : int) (temp___skip_top_level_76 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_75 : int) (temp___skip_top_level_76 : bool) }
+
+end
+
+(* Module giving axioms for type "string", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__string___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Standard__positive as Standard__positive
+ use        Standard__string as Standard__string
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_96 : Standard__string.string) (temp___is_init_92 : bool) (temp___skip_constant_93 : bool) (temp___do_toplevel_94 : bool) (temp___do_typ_inv_95 : bool) =
+  (if (temp___skip_constant_93) then (
+   true) else (
+   (Standard__string.dynamic_property Standard__positive.first Standard__positive.last (Standard__string.first temp___expr_96) (Standard__string.last temp___expr_96))))
+ val dynamic_invariant [@inline] 
+   (temp___expr_96 : Standard__string.string) (temp___is_init_92 : bool) (temp___skip_constant_93 : bool) (temp___do_toplevel_94 : bool) (temp___do_typ_inv_95 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_96 : Standard__string.string) (temp___is_init_92 : bool) (temp___skip_constant_93 : bool) (temp___do_toplevel_94 : bool) (temp___do_typ_inv_95 : bool) }
+
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "main" defined at main.adb:3, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Main__subprogram_def
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        "_gnatprove_standard".Integer as Integer
+ use        Standard_String__Img as Standard_String__Img
+ use        Standard__integer as Standard__integer
+ use        Standard__positive as Standard__positive
+ use        Array__Int__Standard__character__Concat as Array__Int__Standard__character__Concat
+ use        Standard__string as Standard__string
+ use        Main__map_array as Main__map_array
+ use        Islands__count_islands___axiom as Islands__count_islands___axiom
+ use        Ada___ada__text_io__put_line__2___axiom as Ada___ada__text_io__put_line__2___axiom
+ use        Islands__map___axiom as Islands__map___axiom
+ use        Main__map_array__aggregate_def as Main__map_array__aggregate_def
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+ use        Array__Int_Int__Islands__int_needed as Array__Int_Int__Islands__int_needed
+ use        Temp___String_Literal_246 as Temp___String_Literal_246
+ use        Array__Int__Standard__character as Array__Int__Standard__character
+ use        Array__Int__Standard__character as Array__Int__Standard__character
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Standard__positive___axiom as Standard__positive___axiom
+ use        Standard__character___axiom as Standard__character___axiom
+ use        Standard__string___axiom as Standard__string___axiom
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Main__map_array___axiom as Main__map_array___axiom
+ use        Main__map_array__aggregate_def___axiom as Main__map_array__aggregate_def___axiom
+ use        Ada___ada__text_io__count___axiom as Ada___ada__text_io__count___axiom
+ use        Ada___ada__text_io__line_length__2___axiom as Ada___ada__text_io__line_length__2___axiom
+ use        Ada___ada__text_io__page_length__2___axiom as Ada___ada__text_io__page_length__2___axiom
+ use        Ada___ada__text_io__put_line__2___axiom as Ada___ada__text_io__put_line__2___axiom
+ use        Islands__int_needed___axiom as Islands__int_needed___axiom
+ use        Islands__map___axiom as Islands__map___axiom
+ use        Islands__count_islands___axiom as Islands__count_islands___axiom
+
+ let def [#"main.adb" 3 0 0][@GP_Subp:main.adb:3] 
+   (__void_param : unit)
+  requires { [#"main.adb" 3 0 0] true }
+   = [@vc:divergent]
+  ( () (* Assume dynamic invariants of inputs of the subprogram main.adb:3 *)
+  ;
+  () (* Declarations introduced by the compiler at the beginning of the subprogram main.adb:3 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram main.adb:3 *)
+  ;
+  [#"main.adb" 3 0 0] begin ensures {true} let _ = (let _  = True in (
+   ()))
+   in () end ;
+  () (* Assume Pre of the subprogram main.adb:3 *)
+  ;
+  [#"main.adb" 3 0 0] try
+   ( ();
+   ([#"main.adb" 4 0 0] ());
+   ([#"main.adb" 6 0 0] ());
+   ([#"main.adb" 6 0 0] ());
+   ([#"main.adb" 6 0 0] ());
+   ([#"main.adb" 8 0 0] ( (let main__map_array__assume  = (Main__map_array__aggregate_def.main__map_array__aggregate_def((1 : int)) ((0 : int)) ((1 : int)) ((0 : int)) ((0 : int)) ((0 : int)) ((0 : int)) ((0 : int)) ((1 : int)) ((0 : int)) ((1 : int)) ((0 : int)) ((1 : int)) ((1 : int)) ((0 : int)) ((0 : int)) ((1 : int)) ((1 : int)) ((1 : int)) ((0 : int))) in (
+    [#"main.adb" 8 0 0] assume { [#"main.adb" 8 0 0] (main__map_array__assume = Main__map_array.map_array) }))
+   ;
+   [#"main.adb" 8 0 0] assume { [#"main.adb" 8 0 0] (Islands__map___axiom.dynamic_invariant Main__map_array.map_array True False True True) } ));
+   ();
+   ( [@GP_Sloc:main.adb:14:32] ([#"main.adb" 14 0 0] ()) );
+   ( [@GP_Sloc:main.adb:14:4] ([#"main.adb" 14 0 0] ()) );
+   ( [@GP_Sloc:main.adb:14:4] ([#"main.adb" 14 0 0] ( (Ada___ada__text_io__put_line__2___axiom.put_line__2((let temp___248 [@mlw:proxy_symbol] [@introduced]  = (Standard_String__Img.to_string((Standard__integer.attr__ATTRIBUTE_IMAGE(([#"main.adb" 14 0 0] ( [@GP_Shape:call_put_line__2__concat__img_ref__call_count_islands] [@GP_Reason:VC_PRECONDITION] [@vc:annotation] [@comment:   Put_Line("The result is:" & Count_Islands(Map_Array)'Img);                                ^ main.adb:14:32:VC_PRECONDITION] [@GP_Id:0] [@GP_Sloc:main.adb:14:32] (Islands__count_islands___axiom.count_islands(Main__map_array.map_array)) ))))) ((12 : int))) in (
+   (let temp___247 [@mlw:proxy_symbol] [@introduced]  = (Temp___String_Literal_246.temp___String_Literal_246(())) in (
+    (Standard__string.of_array((Array__Int__Standard__character__Concat.concat(temp___247) ((1 : int)) ((14 : int)) ((Standard__string.to_array(temp___248))) ((Standard__string.first(temp___248))) ((Standard__string.last(temp___248))))) ((1 : int)) (([#"main.adb" 14 0 0] ( [@vc:annotation] [@comment:   Put_Line("The result is:" & Count_Islands(Map_Array)'Img);                              ^ main.adb:14:30:VC_RANGE_CHECK] [@GP_Reason:VC_RANGE_CHECK] [@GP_Id:1] [@GP_Sloc:main.adb:14:30] [@GP_Shape:call_put_line__2__concat] (Standard__positive.range_check_((((1 : int) + ((Integer.length((1 : int)) ((14 : int))) + (Integer.length((Standard__string.first(temp___248))) ((Standard__string.last(temp___248)))))) - (1 : int)))) ))))))
+   ))
+   )) )) );
+    raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+   begin ensures {true} let _ = (let _  = True in (
+   ()))
+   in () end  )
+end

@@ -1,0 +1,1615 @@
+(* Module for defining the constant "n" defined at islands.ads:6, created in Gnat2Why.Decls.Translate_Constant *)
+module Islands__n
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val constant n [#"islands.ads" 6 0 0][@model_trace:2595] [@name:N] 
+   : int
+
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining the value of constant "n" defined at islands.ads:6, created in Gnat2Why.Decls.Translate_Constant_Value *)
+module Islands__n___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__n as Islands__n
+
+ axiom n__def_axiom :
+  ((Islands__n.n ) = (4 : int))
+
+end
+
+(* Module for defining the constant "m" defined at islands.ads:7, created in Gnat2Why.Decls.Translate_Constant *)
+module Islands__m
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val constant m [#"islands.ads" 7 0 0][@model_trace:2605] [@name:M] 
+   : int
+
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining the value of constant "m" defined at islands.ads:7, created in Gnat2Why.Decls.Translate_Constant_Value *)
+module Islands__m___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__m as Islands__m
+
+ axiom m__def_axiom :
+  ((Islands__m.m ) = (5 : int))
+
+end
+
+(* Module for axiomatizing type "islands" defined at islands.ads:14, created in Gnat2Why.Types.Translate_Type *)
+module Islands__islands
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ type islands 
+ 
+ val constant first 
+   : int
+  ensures { result =  (0 : int) }
+ 
+ val constant last 
+   : int
+  ensures { result =  (1 : int) }
+ 
+ predicate in_range 
+   (x : int) =
+  ( (first <= x) /\ (x <= last) )
+ val in_range 
+   (x : int) : bool
+  ensures { result <-> in_range (x : int) }
+ 
+ clone export "ada__model".Static_Discrete with axiom .,
+ type t = islands, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type islands__ref =
+  { mutable islands__content : islands }
+ 
+ function islands__ref_islands__content__projection 
+   (a : islands__ref) : islands =
+  a.islands__content
+ 
+ meta "model_projection" function islands__ref_islands__content__projection
+ 
+ meta "inline:no" function islands__ref_islands__content__projection
+ 
+ val islands__havoc 
+   (x : islands__ref) : unit
+  writes {x}
+
+end
+
+(* Module defining to_rep/of_rep for type "islands" defined at islands.ads:14, created in Gnat2Why.Types.Translate_Type *)
+module Islands__islands__rep
+ use        Islands__islands as Islands__islands
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ clone export "ada__model".Rep_Proj_Int with axiom .,
+ type t = Islands__islands.islands, 
+ predicate in_range = Islands__islands.in_range
+ 
+ meta "model_projection" function to_rep
+ 
+ meta "inline:no" function to_rep
+
+end
+
+(* Module for axiomatizing the array theory associated to type "TmapB" defined at islands.ads:19, created in Why.Gen.Arrays.Create_Rep_Array_Theory *)
+module Array__Int_Int__Islands__islands
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__islands as Islands__islands
+ use        Islands__islands__rep as Islands__islands__rep
+
+ function index_I1_one 
+   : int =
+  (1 : int)
+ 
+ function index_I2_one 
+   : int =
+  (1 : int)
+ 
+ type component_type =
+  Islands__islands.islands
+ 
+ clone export "_gnatprove_standard".Array__2 with axiom .,
+ type I1.t = int, 
+ predicate I1.le = Int.(<=), 
+ predicate I1.lt = Int.(<), 
+ predicate I1.gt = Int.(>), 
+ function I1.add = Int.(+), 
+ function I1.sub = Int.(-), 
+ function I1.one = index_I1_one, 
+ type I2.t = int, 
+ predicate I2.le = Int.(<=), 
+ predicate I2.lt = Int.(<), 
+ predicate I2.gt = Int.(>), 
+ function I2.add = Int.(+), 
+ function I2.sub = Int.(-), 
+ function I2.one = index_I2_one, 
+ type component_type = component_type
+ 
+ function bool_eq 
+   (a : map) (a__first : int) (a__last : int) (a__first_2 : int) (a__last_2 : int) (b : map) (b__first : int) (b__last : int) (b__first_2 : int) (b__last_2 : int) : bool =
+  ( ( (if ((a__first <= a__last)) then (
+   ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+   (b__first > b__last))) /\ (if ((a__first_2 <= a__last_2)) then (
+   ( (b__first_2 <= b__last_2) /\ ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)) )) else (
+   (b__first_2 > b__last_2))) ) /\ (forall temp___idx_154   temp___idx_155   : int.
+   (if (( ( (a__first <= temp___idx_154) /\ (temp___idx_154 <= a__last) ) /\ ( (a__first_2 <= temp___idx_155) /\ (temp___idx_155 <= a__last_2) ) )) then (
+    ((Islands__islands__rep.to_rep (get a temp___idx_154 temp___idx_155)) = (Islands__islands__rep.to_rep (get b ((b__first - a__first) + temp___idx_154) ((b__first_2 - a__first_2) + temp___idx_155))))) else true)) )
+ val bool_eq 
+   (a : map) (a__first : int) (a__last : int) (a__first_2 : int) (a__last_2 : int) (b : map) (b__first : int) (b__last : int) (b__first_2 : int) (b__last_2 : int) : bool
+  ensures { result = bool_eq (a : map) (a__first : int) (a__last : int) (a__first_2 : int) (a__last_2 : int) (b : map) (b__first : int) (b__last : int) (b__first_2 : int) (b__last_2 : int) }
+ 
+ axiom bool_eq_rev :
+  (forall a   b   : map.
+  (forall a__first   a__last   a__first_2   a__last_2   b__first   b__last   b__first_2   b__last_2   : int.
+   ( ((bool_eq b b__first b__last b__first_2 b__last_2 a a__first a__last a__first_2 a__last_2) = True) -> ( ( (if ((a__first <= a__last)) then (
+    ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+    (b__first > b__last))) /\ (if ((a__first_2 <= a__last_2)) then (
+    ( (b__first_2 <= b__last_2) /\ ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)) )) else (
+    (b__first_2 > b__last_2))) ) /\ (forall temp___idx_154   temp___idx_155   : int.
+    (if (( ( (a__first <= temp___idx_154) /\ (temp___idx_154 <= a__last) ) /\ ( (a__first_2 <= temp___idx_155) /\ (temp___idx_155 <= a__last_2) ) )) then (
+     ((Islands__islands__rep.to_rep (get a temp___idx_154 temp___idx_155)) = (Islands__islands__rep.to_rep (get b ((b__first - a__first) + temp___idx_154) ((b__first_2 - a__first_2) + temp___idx_155))))) else true)) ) )))
+
+end
+
+(* Module for axiomatizing the array theory associated to type "TvisitedB" defined at islands.ads:20, created in Why.Gen.Arrays.Create_Rep_Array_Theory *)
+module Array__Int_Int__Bool
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ function index_I1_one 
+   : int =
+  (1 : int)
+ 
+ function index_I2_one 
+   : int =
+  (1 : int)
+ 
+ type component_type =
+  bool
+ 
+ clone export "_gnatprove_standard".Array__2 with axiom .,
+ type I1.t = int, 
+ predicate I1.le = Int.(<=), 
+ predicate I1.lt = Int.(<), 
+ predicate I1.gt = Int.(>), 
+ function I1.add = Int.(+), 
+ function I1.sub = Int.(-), 
+ function I1.one = index_I1_one, 
+ type I2.t = int, 
+ predicate I2.le = Int.(<=), 
+ predicate I2.lt = Int.(<), 
+ predicate I2.gt = Int.(>), 
+ function I2.add = Int.(+), 
+ function I2.sub = Int.(-), 
+ function I2.one = index_I2_one, 
+ type component_type = component_type
+ 
+ function bool_eq 
+   (a : map) (a__first : int) (a__last : int) (a__first_2 : int) (a__last_2 : int) (b : map) (b__first : int) (b__last : int) (b__first_2 : int) (b__last_2 : int) : bool =
+  ( ( (if ((a__first <= a__last)) then (
+   ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+   (b__first > b__last))) /\ (if ((a__first_2 <= a__last_2)) then (
+   ( (b__first_2 <= b__last_2) /\ ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)) )) else (
+   (b__first_2 > b__last_2))) ) /\ (forall temp___idx_156   temp___idx_157   : int.
+   (if (( ( (a__first <= temp___idx_156) /\ (temp___idx_156 <= a__last) ) /\ ( (a__first_2 <= temp___idx_157) /\ (temp___idx_157 <= a__last_2) ) )) then (
+    ((get a temp___idx_156 temp___idx_157) = (get b ((b__first - a__first) + temp___idx_156) ((b__first_2 - a__first_2) + temp___idx_157)))) else true)) )
+ val bool_eq 
+   (a : map) (a__first : int) (a__last : int) (a__first_2 : int) (a__last_2 : int) (b : map) (b__first : int) (b__last : int) (b__first_2 : int) (b__last_2 : int) : bool
+  ensures { result = bool_eq (a : map) (a__first : int) (a__last : int) (a__first_2 : int) (a__last_2 : int) (b : map) (b__first : int) (b__last : int) (b__first_2 : int) (b__last_2 : int) }
+ 
+ axiom bool_eq_rev :
+  (forall a   b   : map.
+  (forall a__first   a__last   a__first_2   a__last_2   b__first   b__last   b__first_2   b__last_2   : int.
+   ( ((bool_eq b b__first b__last b__first_2 b__last_2 a a__first a__last a__first_2 a__last_2) = True) -> ( ( (if ((a__first <= a__last)) then (
+    ( (b__first <= b__last) /\ ((a__last - a__first) = (b__last - b__first)) )) else (
+    (b__first > b__last))) /\ (if ((a__first_2 <= a__last_2)) then (
+    ( (b__first_2 <= b__last_2) /\ ((a__last_2 - a__first_2) = (b__last_2 - b__first_2)) )) else (
+    (b__first_2 > b__last_2))) ) /\ (forall temp___idx_156   temp___idx_157   : int.
+    (if (( ( (a__first <= temp___idx_156) /\ (temp___idx_156 <= a__last) ) /\ ( (a__first_2 <= temp___idx_157) /\ (temp___idx_157 <= a__last_2) ) )) then (
+     ((get a temp___idx_156 temp___idx_157) = (get b ((b__first - a__first) + temp___idx_156) ((b__first_2 - a__first_2) + temp___idx_157)))) else true)) ) )))
+
+end
+
+(* Module for possibly declaring a logic function for "visit_islands" defined at islands.ads:33, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Islands__visit_islands
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+
+ val function visit_islands 
+   (map_array : Array__Int_Int__Islands__islands.map) (i : int) (j : int) (visited_array : Array__Int_Int__Bool.map) : Array__Int_Int__Bool.map
+ 
+ val predicate visit_islands__function_guard 
+   (temp___result_158 : Array__Int_Int__Bool.map) (map_array : Array__Int_Int__Islands__islands.map) (i : int) (j : int) (visited_array : Array__Int_Int__Bool.map)
+
+end
+
+(* Module giving axioms for type "visited" defined at islands.ads:20, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Islands__visited___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_197 : Array__Int_Int__Bool.map) (temp___is_init_193 : bool) (temp___skip_constant_194 : bool) (temp___do_toplevel_195 : bool) (temp___do_typ_inv_196 : bool) =
+  true
+ val dynamic_invariant [@inline] 
+   (temp___expr_197 : Array__Int_Int__Bool.map) (temp___is_init_193 : bool) (temp___skip_constant_194 : bool) (temp___do_toplevel_195 : bool) (temp___do_typ_inv_196 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_197 : Array__Int_Int__Bool.map) (temp___is_init_193 : bool) (temp___skip_constant_194 : bool) (temp___do_toplevel_195 : bool) (temp___do_typ_inv_196 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_200 : Array__Int_Int__Bool.map) (temp___skip_top_level_201 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_200 : Array__Int_Int__Bool.map) (temp___skip_top_level_201 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_200 : Array__Int_Int__Bool.map) (temp___skip_top_level_201 : bool) }
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "visit_islands" defined at islands.ads:33, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Islands__visit_islands___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__visit_islands as Islands__visit_islands
+ use        Islands__visited___axiom as Islands__visited___axiom
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+
+ val visit_islands 
+   (map_array : Array__Int_Int__Islands__islands.map) (i : int) (j : int) (visited_array : Array__Int_Int__Bool.map) : Array__Int_Int__Bool.map
+  requires {  ( ( ( ( ( [@GP_Pretty_Ada:2778] true ) /\ ( [@GP_Pretty_Ada:2782] (i >= (0 : int)) ) ) /\ ( [@GP_Pretty_Ada:2786] (j >= (0 : int)) ) ) /\ ( [@GP_Pretty_Ada:2790] (j <= (6 : int)) ) ) /\ ( [@GP_Pretty_Ada:2796] (i <= (5 : int)) ) ) }
+  ensures {  ( ( (result = (Islands__visit_islands.visit_islands map_array i j visited_array)) /\ (Islands__visit_islands.visit_islands__function_guard result map_array i j visited_array) )/\(Islands__visited___axiom.dynamic_invariant result True False True True) ) }
+
+end
+
+(* Module for axiomatizing type "integer", created in Gnat2Why.Types.Translate_Type *)
+module Standard__integer
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ type integer =
+  < range -2147483648 2147483647 >
+ 
+ val constant first 
+   : int
+  ensures { result =  (( -2147483648) : int) }
+ 
+ val constant last 
+   : int
+  ensures { result =  (2147483647 : int) }
+ 
+ predicate in_range 
+   (x : int) =
+  ( (first <= x) /\ (x <= last) )
+ val in_range 
+   (x : int) : bool
+  ensures { result <-> in_range (x : int) }
+ 
+ clone export "ada__model".Static_Discrete with axiom .,
+ type t = integer, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type integer__ref =
+  { mutable integer__content : integer }
+ 
+ function integer__ref_integer__content__projection 
+   (a : integer__ref) : integer =
+  a.integer__content
+ 
+ meta "model_projection" function integer__ref_integer__content__projection
+ 
+ meta "inline:no" function integer__ref_integer__content__projection
+ 
+ val integer__havoc 
+   (x : integer__ref) : unit
+  writes {x}
+
+end
+
+(* Module giving axioms for type "integer", created in Gnat2Why.Types.Generate_Type_Completion *)
+module Standard__integer___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Standard__integer as Standard__integer
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_18 : int) (temp___is_init_14 : bool) (temp___skip_constant_15 : bool) (temp___do_toplevel_16 : bool) (temp___do_typ_inv_17 : bool) =
+  (if (( temp___is_init_14 \/ (Standard__integer.first <= Standard__integer.last) )) then (
+   (Standard__integer.dynamic_property Standard__integer.first Standard__integer.last temp___expr_18)) else true)
+ val dynamic_invariant [@inline] 
+   (temp___expr_18 : int) (temp___is_init_14 : bool) (temp___skip_constant_15 : bool) (temp___do_toplevel_16 : bool) (temp___do_typ_inv_17 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_18 : int) (temp___is_init_14 : bool) (temp___skip_constant_15 : bool) (temp___do_toplevel_16 : bool) (temp___do_typ_inv_17 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_19 : int) (temp___skip_top_level_20 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_19 : int) (temp___skip_top_level_20 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_19 : int) (temp___skip_top_level_20 : bool) }
+
+end
+
+(* Module for possibly declaring a logic function for "count_islands" defined at islands.ads:47, created in Gnat2Why.Subprograms.Translate_Subprogram_Spec *)
+module Islands__count_islands
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+
+ val function count_islands 
+   (map_array : Array__Int_Int__Islands__islands.map) : int
+ 
+ val predicate count_islands__function_guard 
+   (temp___result_159 : int) (map_array : Array__Int_Int__Islands__islands.map)
+
+end
+
+(* Module for declaring a program function (and possibly an axiom) for "count_islands" defined at islands.ads:47, created in Gnat2Why.Subprograms.Generate_Subprogram_Completion *)
+module Islands__count_islands___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Standard__integer as Standard__integer
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Islands__count_islands as Islands__count_islands
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+
+ val count_islands 
+   (map_array : Array__Int_Int__Islands__islands.map) : int
+  requires {  ( [@GP_Pretty_Ada:2914] true ) }
+  ensures {  ( ( (result = (Islands__count_islands.count_islands map_array)) /\ (Islands__count_islands.count_islands__function_guard result map_array) )/\( (Standard__integer___axiom.dynamic_invariant result True False True True) /\ ( [@GP_Pretty_Ada:2931] (result = (20 : int)) ) ) ) }
+ 
+ axiom count_islands__post_axiom :
+  (forall map_array   : Array__Int_Int__Islands__islands.map [(Islands__count_islands.count_islands map_array)].
+   (let result  = (Islands__count_islands.count_islands map_array) in (
+    (Standard__integer.dynamic_property Standard__integer.first Standard__integer.last result)))
+  )
+
+end
+
+(* Module for defining a ref holding the value of variable "the_water" defined at islands.ads:15, created in Gnat2Why.Decls.Translate_Variable *)
+module Islands__the_water
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val the_water [#"islands.ads" 15 0 0][@model_projected] [@model_trace:2667] [@name:The_Water]  : int__ref 
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining a ref holding the value of variable "the_land" defined at islands.ads:16, created in Gnat2Why.Decls.Translate_Variable *)
+module Islands__the_land
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val the_land [#"islands.ads" 16 0 0][@model_trace:2677] [@model_projected] [@name:The_Land]  : int__ref 
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining a ref holding the value of variable "visited_array" defined at islands.ads:21, created in Gnat2Why.Decls.Translate_Variable *)
+module Islands__visited_array
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+
+ val visited_array [#"islands.ads" 21 0 0][@model_trace:2715] [@model_projected] [@name:Visited_Array]  : Array__Int_Int__Bool.map__ref 
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module giving axioms for type "islands" defined at islands.ads:14, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Islands__islands___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__islands as Islands__islands
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_178 : int) (temp___is_init_174 : bool) (temp___skip_constant_175 : bool) (temp___do_toplevel_176 : bool) (temp___do_typ_inv_177 : bool) =
+  (if (( temp___is_init_174 \/ (Islands__islands.first <= Islands__islands.last) )) then (
+   (Islands__islands.dynamic_property Islands__islands.first Islands__islands.last temp___expr_178)) else true)
+ val dynamic_invariant [@inline] 
+   (temp___expr_178 : int) (temp___is_init_174 : bool) (temp___skip_constant_175 : bool) (temp___do_toplevel_176 : bool) (temp___do_typ_inv_177 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_178 : int) (temp___is_init_174 : bool) (temp___skip_constant_175 : bool) (temp___do_toplevel_176 : bool) (temp___do_typ_inv_177 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_179 : int) (temp___skip_top_level_180 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_179 : int) (temp___skip_top_level_180 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_179 : int) (temp___skip_top_level_180 : bool) }
+
+end
+
+(* Module giving an empty axiom for the entity "the_water" defined at islands.ads:15, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__the_water___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "the_land" defined at islands.ads:16, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__the_land___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "visited_array" defined at islands.ads:21, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__visited_array___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module for checking absence of run-time errors and package initial condition on package elaboration of "islands" defined at islands.ads:1, created in Gnat2Why.Subprograms.Generate_VCs_For_Package_Elaboration *)
+module Islands__package_def
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Islands__n as Islands__n
+ use        Islands__m as Islands__m
+ use        Islands__the_water as Islands__the_water
+ use        Islands__the_land as Islands__the_land
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Islands__visited_array as Islands__visited_array
+ use        Islands__islands___axiom as Islands__islands___axiom
+ use        Islands__visited___axiom as Islands__visited___axiom
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Islands__n___axiom as Islands__n___axiom
+ use        Islands__m___axiom as Islands__m___axiom
+ use        Islands__islands___axiom as Islands__islands___axiom
+ use        Islands__the_water___axiom as Islands__the_water___axiom
+ use        Islands__the_land___axiom as Islands__the_land___axiom
+ use        Islands__visited___axiom as Islands__visited___axiom
+ use        Islands__visited_array___axiom as Islands__visited_array___axiom
+
+ let def [#"islands.ads" 1 0 0][@GP_Subp:islands.ads:1] 
+   (__void_param : unit)
+  requires { [#"islands.ads" 1 0 0] true }
+   = [@vc:divergent]
+  ( ();
+  ([#"islands.ads" 2 0 0] ());
+  ([#"islands.ads" 6 0 0] ( [#"islands.ads" 6 0 0] begin ensures {true} let _ = (let _  = (4 : int) in (
+   ()))
+   in () end ;
+  [#"islands.ads" 6 0 0] assume { [#"islands.ads" 6 0 0] (Standard__integer___axiom.dynamic_invariant Islands__n.n True False True True) } ));
+  ([#"islands.ads" 7 0 0] ( [#"islands.ads" 7 0 0] begin ensures {true} let _ = (let _  = (5 : int) in (
+   ()))
+   in () end ;
+  [#"islands.ads" 7 0 0] assume { [#"islands.ads" 7 0 0] (Standard__integer___axiom.dynamic_invariant Islands__m.m True False True True) } ));
+  ([#"islands.ads" 8 0 0] ());
+  ([#"islands.ads" 10 0 0] ());
+  ([#"islands.ads" 14 0 0] ());
+  ([#"islands.ads" 15 0 0] ());
+  ([#"islands.ads" 15 0 0] ( [#"islands.ads" 15 0 0] (Islands__the_water.the_water.int__content <- ( (0 : int) ));
+  [#"islands.ads" 15 0 0] assume { [#"islands.ads" 15 0 0] (Islands__islands___axiom.dynamic_invariant Islands__the_water.the_water.int__content True False True True) } ));
+  ([#"islands.ads" 16 0 0] ( [#"islands.ads" 16 0 0] (Islands__the_land.the_land.int__content <- ( (1 : int) ));
+  [#"islands.ads" 16 0 0] assume { [#"islands.ads" 16 0 0] (Islands__islands___axiom.dynamic_invariant Islands__the_land.the_land.int__content True False True True) } ));
+  ([#"islands.ads" 19 0 0] ());
+  ([#"islands.ads" 20 0 0] ());
+  ([#"islands.ads" 21 0 0] ());
+  ([#"islands.ads" 21 0 0] ());
+  ([#"islands.ads" 21 0 0] ( [#"islands.ads" 21 0 0] assume { [#"islands.ads" 21 0 0] (Islands__visited___axiom.default_initial_assumption Islands__visited_array.visited_array.Array__Int_Int__Bool.map__content False) };
+  [#"islands.ads" 21 0 0] assume { [#"islands.ads" 21 0 0] (Islands__visited___axiom.dynamic_invariant Islands__visited_array.visited_array.Array__Int_Int__Bool.map__content False False True True) } ));
+  ([#"islands.ads" 33 0 0] ());
+  ([#"islands.ads" 35 0 0] ());
+  ([#"islands.ads" 47 0 0] ());
+  ([#"islands.ads" 49 0 0] ());
+  ([#"islands.ads" 48 0 0] ());
+  ([#"islands.ads" 48 0 0] ());
+  ([#"islands.ads" 48 0 0] ());
+  ([#"islands.ads" 48 0 0] ());
+  ([#"islands.ads" 48 0 0] ());
+  ();
+  ([#"islands.adb" 2 0 0] ());
+  ([#"islands.adb" 5 0 0] ());
+  ([#"islands.adb" 27 0 0] ());
+  ();
+  ( [@GP_Sloc:islands.adb:48:1] ([#"islands.adb" 48 0 0] ()) ) )
+end
+
+(* Module for defining the constant "map_array" defined at islands.ads:34, created in Gnat2Why.Decls.Translate_Constant *)
+module Islands__visit_islands__map_array
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+
+ val constant map_array [#"islands.ads" 34 0 0][@model_projected] [@name:Map_Array] [@model_trace:2731] 
+   : Array__Int_Int__Islands__islands.map
+
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining the constant "i" defined at islands.ads:34, created in Gnat2Why.Decls.Translate_Constant *)
+module Islands__visit_islands__i
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val constant i [#"islands.ads" 34 0 0][@model_trace:2740] [@name:I] 
+   : int
+
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining the constant "j" defined at islands.ads:34, created in Gnat2Why.Decls.Translate_Constant *)
+module Islands__visit_islands__j
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val constant j [#"islands.ads" 34 0 0][@model_trace:2749] [@name:J] 
+   : int
+
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining the constant "visited_array" defined at islands.ads:34, created in Gnat2Why.Decls.Translate_Constant *)
+module Islands__visit_islands__visited_array
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+
+ val constant visited_array [#"islands.ads" 34 0 0][@model_trace:2758] [@model_projected] [@name:Visited_Array] 
+   : Array__Int_Int__Bool.map
+
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining a ref holding the value of variable "vis_array" defined at islands.adb:7, created in Gnat2Why.Decls.Translate_Variable *)
+module Islands__visit_islands__vis_array
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+
+ val vis_array [#"islands.adb" 7 0 0][@name:Vis_Array] [@model_trace:2354] [@model_projected]  : Array__Int_Int__Bool.map__ref 
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for axiomatizing type "n_range" defined at islands.ads:8, created in Gnat2Why.Types.Translate_Type *)
+module Islands__n_range
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ type n_range =
+  < range 1 4 >
+ 
+ val constant first 
+   : int
+  ensures { result =  (1 : int) }
+ 
+ val constant last 
+   : int
+  ensures { result =  (4 : int) }
+ 
+ predicate in_range 
+   (x : int) =
+  ( (first <= x) /\ (x <= last) )
+ val in_range 
+   (x : int) : bool
+  ensures { result <-> in_range (x : int) }
+ 
+ clone export "ada__model".Static_Discrete with axiom .,
+ type t = n_range, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type n_range__ref =
+  { mutable n_range__content : n_range }
+ 
+ function n_range__ref_n_range__content__projection 
+   (a : n_range__ref) : n_range =
+  a.n_range__content
+ 
+ meta "model_projection" function n_range__ref_n_range__content__projection
+ 
+ meta "inline:no" function n_range__ref_n_range__content__projection
+ 
+ val n_range__havoc 
+   (x : n_range__ref) : unit
+  writes {x}
+
+end
+
+(* Module for axiomatizing type "m_range" defined at islands.ads:10, created in Gnat2Why.Types.Translate_Type *)
+module Islands__m_range
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+
+ type m_range =
+  < range 1 5 >
+ 
+ val constant first 
+   : int
+  ensures { result =  (1 : int) }
+ 
+ val constant last 
+   : int
+  ensures { result =  (5 : int) }
+ 
+ predicate in_range 
+   (x : int) =
+  ( (first <= x) /\ (x <= last) )
+ val in_range 
+   (x : int) : bool
+  ensures { result <-> in_range (x : int) }
+ 
+ clone export "ada__model".Static_Discrete with axiom .,
+ type t = m_range, 
+ function first = first, 
+ function last = last, 
+ predicate in_range = in_range
+ 
+ type m_range__ref =
+  { mutable m_range__content : m_range }
+ 
+ function m_range__ref_m_range__content__projection 
+   (a : m_range__ref) : m_range =
+  a.m_range__content
+ 
+ meta "model_projection" function m_range__ref_m_range__content__projection
+ 
+ meta "inline:no" function m_range__ref_m_range__content__projection
+ 
+ val m_range__havoc 
+   (x : m_range__ref) : unit
+  writes {x}
+
+end
+
+(* Module giving axioms for type "map" defined at islands.ads:19, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Islands__map___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_185 : Array__Int_Int__Islands__islands.map) (temp___is_init_181 : bool) (temp___skip_constant_182 : bool) (temp___do_toplevel_183 : bool) (temp___do_typ_inv_184 : bool) =
+  true
+ val dynamic_invariant [@inline] 
+   (temp___expr_185 : Array__Int_Int__Islands__islands.map) (temp___is_init_181 : bool) (temp___skip_constant_182 : bool) (temp___do_toplevel_183 : bool) (temp___do_typ_inv_184 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_185 : Array__Int_Int__Islands__islands.map) (temp___is_init_181 : bool) (temp___skip_constant_182 : bool) (temp___do_toplevel_183 : bool) (temp___do_typ_inv_184 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_188 : Array__Int_Int__Islands__islands.map) (temp___skip_top_level_189 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_188 : Array__Int_Int__Islands__islands.map) (temp___skip_top_level_189 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_188 : Array__Int_Int__Islands__islands.map) (temp___skip_top_level_189 : bool) }
+
+end
+
+(* Module giving an empty axiom for the entity "vis_array" defined at islands.adb:7, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__visit_islands__vis_array___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving axioms for type "n_range" defined at islands.ads:8, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Islands__n_range___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__n_range as Islands__n_range
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_164 : int) (temp___is_init_160 : bool) (temp___skip_constant_161 : bool) (temp___do_toplevel_162 : bool) (temp___do_typ_inv_163 : bool) =
+  (if (( temp___is_init_160 \/ (Islands__n_range.first <= Islands__n_range.last) )) then (
+   (Islands__n_range.dynamic_property Islands__n_range.first Islands__n_range.last temp___expr_164)) else true)
+ val dynamic_invariant [@inline] 
+   (temp___expr_164 : int) (temp___is_init_160 : bool) (temp___skip_constant_161 : bool) (temp___do_toplevel_162 : bool) (temp___do_typ_inv_163 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_164 : int) (temp___is_init_160 : bool) (temp___skip_constant_161 : bool) (temp___do_toplevel_162 : bool) (temp___do_typ_inv_163 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_165 : int) (temp___skip_top_level_166 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_165 : int) (temp___skip_top_level_166 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_165 : int) (temp___skip_top_level_166 : bool) }
+
+end
+
+(* Module giving axioms for type "m_range" defined at islands.ads:10, created in Gnat2Why.Types.Generate_Type_Completion *)
+module Islands__m_range___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        Islands__m_range as Islands__m_range
+
+ predicate dynamic_invariant [@inline] 
+   (temp___expr_171 : int) (temp___is_init_167 : bool) (temp___skip_constant_168 : bool) (temp___do_toplevel_169 : bool) (temp___do_typ_inv_170 : bool) =
+  (if (( temp___is_init_167 \/ (Islands__m_range.first <= Islands__m_range.last) )) then (
+   (Islands__m_range.dynamic_property Islands__m_range.first Islands__m_range.last temp___expr_171)) else true)
+ val dynamic_invariant [@inline] 
+   (temp___expr_171 : int) (temp___is_init_167 : bool) (temp___skip_constant_168 : bool) (temp___do_toplevel_169 : bool) (temp___do_typ_inv_170 : bool) : bool
+  ensures { result <-> dynamic_invariant (temp___expr_171 : int) (temp___is_init_167 : bool) (temp___skip_constant_168 : bool) (temp___do_toplevel_169 : bool) (temp___do_typ_inv_170 : bool) }
+ 
+ predicate default_initial_assumption [@inline] 
+   (temp___expr_172 : int) (temp___skip_top_level_173 : bool) =
+  true
+ val default_initial_assumption [@inline] 
+   (temp___expr_172 : int) (temp___skip_top_level_173 : bool) : bool
+  ensures { result <-> default_initial_assumption (temp___expr_172 : int) (temp___skip_top_level_173 : bool) }
+
+end
+
+(* Module giving an empty axiom for the entity "map_array" defined at islands.ads:34, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__visit_islands__map_array___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "i" defined at islands.ads:34, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__visit_islands__i___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "j" defined at islands.ads:34, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__visit_islands__j___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "visited_array" defined at islands.ads:34, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__visit_islands__visited_array___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "visit_islands" defined at islands.ads:33, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Islands__visit_islands__subprogram_def
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        "_gnatprove_standard".Main as Main
+ use        "_gnatprove_standard".Boolean as Boolean
+ use        Standard__integer as Standard__integer
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Islands__visit_islands__map_array as Islands__visit_islands__map_array
+ use        Islands__visit_islands__i as Islands__visit_islands__i
+ use        Islands__visit_islands__j as Islands__visit_islands__j
+ use        Islands__visit_islands__visited_array as Islands__visit_islands__visited_array
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Islands__visit_islands___axiom as Islands__visit_islands___axiom
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Islands__visit_islands__vis_array as Islands__visit_islands__vis_array
+ use        Islands__n_range as Islands__n_range
+ use        Islands__m_range as Islands__m_range
+ use        Islands__islands as Islands__islands
+ use        Islands__islands__rep as Islands__islands__rep
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+ use        Islands__map___axiom as Islands__map___axiom
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Islands__visited___axiom as Islands__visited___axiom
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Islands__visit_islands__vis_array___axiom as Islands__visit_islands__vis_array___axiom
+ use        Islands__n_range___axiom as Islands__n_range___axiom
+ use        Islands__m_range___axiom as Islands__m_range___axiom
+ use        Islands__islands___axiom as Islands__islands___axiom
+ use        Islands__map___axiom as Islands__map___axiom
+ use        Islands__visited___axiom as Islands__visited___axiom
+ use        Islands__visit_islands___axiom as Islands__visit_islands___axiom
+ use        Islands__visit_islands__map_array___axiom as Islands__visit_islands__map_array___axiom
+ use        Islands__visit_islands__i___axiom as Islands__visit_islands__i___axiom
+ use        Islands__visit_islands__j___axiom as Islands__visit_islands__j___axiom
+ use        Islands__visit_islands__visited_array___axiom as Islands__visit_islands__visited_array___axiom
+
+ val islands__visit_islands__result [@model_projected] [@model_trace:2724@result] [@name:Visit_Islands]  : Array__Int_Int__Bool.map__ref 
+ 
+ let def [#"islands.ads" 33 0 0][@GP_Subp:islands.ads:33] 
+   (__void_param : unit)
+  requires { [#"islands.ads" 33 0 0] true }
+   = [@vc:divergent]
+  ( () (* Assume dynamic invariants of inputs of the subprogram islands.ads:33 *)
+  ;
+  [#"islands.ads" 33 0 0] assume { [#"islands.ads" 33 0 0] (Islands__map___axiom.dynamic_invariant Islands__visit_islands__map_array.map_array True False True True) };
+  [#"islands.ads" 33 0 0] assume { [#"islands.ads" 33 0 0] (Standard__integer___axiom.dynamic_invariant Islands__visit_islands__i.i True False True True) };
+  [#"islands.ads" 33 0 0] assume { [#"islands.ads" 33 0 0] (Standard__integer___axiom.dynamic_invariant Islands__visit_islands__j.j True False True True) };
+  [#"islands.ads" 33 0 0] assume { [#"islands.ads" 33 0 0] (Islands__visited___axiom.dynamic_invariant Islands__visit_islands__visited_array.visited_array True False True True) };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram islands.ads:33 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram islands.ads:33 *)
+  ;
+  [#"islands.ads" 33 0 0] begin ensures {true} let _ = (let _  = (Boolean.andb((Boolean.andb((Boolean.andb((Boolean.andb((Boolean.of_int((1 : int)))) ((Islands__visit_islands__i.i >= (0 : int))))) ((Islands__visit_islands__j.j >= (0 : int))))) ((Islands__visit_islands__j.j <= (6 : int))))) ((Islands__visit_islands__i.i <= (5 : int)))) in (
+   ()))
+   in () end ;
+  () (* Assume Pre of the subprogram islands.ads:33 *)
+  ;
+  [#"islands.ads" 33 0 0] assume { [#"islands.ads" 33 0 0] ( ( ( ( ( [@GP_Pretty_Ada:2778] true ) /\ ( [@GP_Pretty_Ada:2782] (Islands__visit_islands__i.i >= (0 : int)) ) ) /\ ( [@GP_Pretty_Ada:2786] (Islands__visit_islands__j.j >= (0 : int)) ) ) /\ ( [@GP_Pretty_Ada:2790] (Islands__visit_islands__j.j <= (6 : int)) ) ) /\ ( [@GP_Pretty_Ada:2796] (Islands__visit_islands__i.i <= (5 : int)) ) ) };
+  [#"islands.ads" 33 0 0] try
+   ( ();
+   ([#"islands.adb" 7 0 0] ( [#"islands.adb" 7 0 0] (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content <- ( Islands__visit_islands__visited_array.visited_array ));
+   [#"islands.adb" 7 0 0] assume { [#"islands.adb" 7 0 0] (Islands__visited___axiom.dynamic_invariant Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content True False True True) } ));
+   ();
+   ( [@GP_Sloc:islands.adb:14:7] ([#"islands.adb" 14 0 0] (if (( ([#"islands.adb" 14 0 0] [#"islands.adb" 14 0 0] (([@branch_id=2365] Main.spark__branch).bool__content <- ( ( ( ( ( ( (Islands__visit_islands__i.i < (1 : int)) || (Islands__visit_islands__j.j < (1 : int)) ) || (Islands__visit_islands__i.i > (4 : int)) ) || (Islands__visit_islands__j.j > (5 : int)) ) || (Array__Int_Int__Bool.get(Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content) (( [#"islands.adb" 14 0 0] assert { [#"islands.adb" 14 0 0] ([#"islands.adb" 14 0 0] ( [@comment:      if i < 1 or else j < 1 or else i > N or else j > M or else Vis_Array(i, j) or else Map_Array(i,j)= Water then                                                                            ^ islands.adb:14:76:VC_INDEX_CHECK] [@GP_Sloc:islands.adb:14:76] [@vc:annotation] [@GP_Reason:VC_INDEX_CHECK] [@GP_Id:0] [@GP_Shape:if__orelse__orelse__ixdcomp] ( (Islands__n_range.first <= Islands__visit_islands__i.i) /\ (Islands__visit_islands__i.i <= Islands__n_range.last) ) )) };
+   Islands__visit_islands__i.i )) ((  assert {  ([#"islands.adb" 14 0 0] ( [@GP_Sloc:islands.adb:14:79] [@comment:      if i < 1 or else j < 1 or else i > N or else j > M or else Vis_Array(i, j) or else Map_Array(i,j)= Water then                                                                               ^ islands.adb:14:79:VC_INDEX_CHECK] [@vc:annotation] [@GP_Reason:VC_INDEX_CHECK] [@GP_Id:1] [@GP_Shape:if__orelse__orelse__ixdcomp] ( (Islands__m_range.first <= Islands__visit_islands__j.j) /\ (Islands__visit_islands__j.j <= Islands__m_range.last) ) )) };
+   Islands__visit_islands__j.j ))) ) || ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__visit_islands__map_array.map_array) ((  assert {  ([#"islands.adb" 14 0 0] ( [@GP_Sloc:islands.adb:14:100] [@vc:annotation] [@GP_Shape:if__orelse__cmp__ixdcomp] [@GP_Reason:VC_INDEX_CHECK] [@comment:      if i < 1 or else j < 1 or else i > N or else j > M or else Vis_Array(i, j) or else Map_Array(i,j)= Water then                                                                                                    ^ islands.adb:14:100:VC_INDEX_CHECK] [@GP_Id:2] ( (Islands__n_range.first <= Islands__visit_islands__i.i) /\ (Islands__visit_islands__i.i <= Islands__n_range.last) ) )) };
+   Islands__visit_islands__i.i )) ((  assert {  ([#"islands.adb" 14 0 0] ( [@GP_Sloc:islands.adb:14:102] [@vc:annotation] [@comment:      if i < 1 or else j < 1 or else i > N or else j > M or else Vis_Array(i, j) or else Map_Array(i,j)= Water then                                                                                                      ^ islands.adb:14:102:VC_INDEX_CHECK] [@GP_Shape:if__orelse__cmp__ixdcomp] [@GP_Reason:VC_INDEX_CHECK] [@GP_Id:3] ( (Islands__m_range.first <= Islands__visit_islands__j.j) /\ (Islands__visit_islands__j.j <= Islands__m_range.last) ) )) };
+   Islands__visit_islands__j.j ))))) = (0 : int)) ) )));
+   ( [@branch_id=2365] Main.spark__branch ).bool__content )) then (
+    ( ();
+    ( [@GP_Sloc:islands.adb:15:17] ([#"islands.adb" 15 0 0] ()) );
+    ( [@GP_Sloc:islands.adb:15:10] ([#"islands.adb" 15 0 0] ( [#"islands.adb" 15 0 0] (islands__visit_islands__result.Array__Int_Int__Bool.map__content <- ( Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content ));
+    [#"islands.adb" 15 0 0] raise Return__exc )) ) )) else (
+    ()))) );
+   ( [@GP_Sloc:islands.adb:18:7] ([#"islands.adb" 18 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:18:22] ([#"islands.adb" 18 0 0] [#"islands.adb" 18 0 0] (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content <- ( (Array__Int_Int__Bool.set(Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content) (( [#"islands.adb" 18 0 0] assert { [#"islands.adb" 18 0 0] ([#"islands.adb" 18 0 0] ( [@GP_Shape:vis_array_assign__ixdcomp] [@comment:      Vis_Array(i, j):= True;                 ^ islands.adb:18:17:VC_INDEX_CHECK] [@GP_Sloc:islands.adb:18:17] [@vc:annotation] [@GP_Reason:VC_INDEX_CHECK] [@GP_Id:4] ( (Islands__n_range.first <= Islands__visit_islands__i.i) /\ (Islands__visit_islands__i.i <= Islands__n_range.last) ) )) };
+   Islands__visit_islands__i.i )) ((  assert {  ([#"islands.adb" 18 0 0] ( [@GP_Shape:vis_array_assign__ixdcomp] [@comment:      Vis_Array(i, j):= True;                    ^ islands.adb:18:20:VC_INDEX_CHECK] [@vc:annotation] [@GP_Reason:VC_INDEX_CHECK] [@GP_Id:5] [@GP_Sloc:islands.adb:18:20] ( (Islands__m_range.first <= Islands__visit_islands__j.j) /\ (Islands__visit_islands__j.j <= Islands__m_range.last) ) )) };
+   Islands__visit_islands__j.j )) ((Boolean.of_int((1 : int))))) ))) );
+   ( [@GP_Sloc:islands.adb:19:7] ([#"islands.adb" 19 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:19:56] ([#"islands.adb" 19 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:19:20] ([#"islands.adb" 19 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:19:17] ([#"islands.adb" 19 0 0] [#"islands.adb" 19 0 0] (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 19 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Shape:vis_array_assign__call_visit_islands] [@vc:annotation] [@GP_Sloc:islands.adb:19:20] [@comment:      Vis_Array := Visit_Islands(Map_Array,  i + 1, j, Vis_Array);-- recur the buttom                    ^ islands.adb:19:20:VC_PRECONDITION] [@GP_Id:7] (Islands__visit_islands___axiom.visit_islands(Islands__visit_islands__map_array.map_array) (([#"islands.adb" 19 0 0] ( [@GP_Sloc:islands.adb:19:48] [@vc:annotation] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:      Vis_Array := Visit_Islands(Map_Array,  i + 1, j, Vis_Array);-- recur the buttom                                                ^ islands.adb:19:48:VC_OVERFLOW_CHECK] [@GP_Shape:vis_array_assign__call_visit_islands__add] [@GP_Id:6] (Standard__integer.range_check_((Islands__visit_islands__i.i + (1 : int)))) ))) (Islands__visit_islands__j.j) (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content)) )) ))) );
+   ( [@GP_Sloc:islands.adb:20:7] ([#"islands.adb" 20 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:20:56] ([#"islands.adb" 20 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:20:20] ([#"islands.adb" 20 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:20:17] ([#"islands.adb" 20 0 0] [#"islands.adb" 20 0 0] (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 20 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Shape:vis_array_assign__call_visit_islands] [@vc:annotation] [@comment:      Vis_Array := Visit_Islands(Map_Array,  i - 1, j, Vis_Array);-- recur the top                    ^ islands.adb:20:20:VC_PRECONDITION] [@GP_Sloc:islands.adb:20:20] [@GP_Id:9] (Islands__visit_islands___axiom.visit_islands(Islands__visit_islands__map_array.map_array) (([#"islands.adb" 20 0 0] ( [@vc:annotation] [@GP_Sloc:islands.adb:20:48] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:      Vis_Array := Visit_Islands(Map_Array,  i - 1, j, Vis_Array);-- recur the top                                                ^ islands.adb:20:48:VC_OVERFLOW_CHECK] [@GP_Shape:vis_array_assign__call_visit_islands__sub] [@GP_Id:8] (Standard__integer.range_check_((Islands__visit_islands__i.i - (1 : int)))) ))) (Islands__visit_islands__j.j) (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content)) )) ))) );
+   ( [@GP_Sloc:islands.adb:21:7] ([#"islands.adb" 21 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:21:56] ([#"islands.adb" 21 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:21:20] ([#"islands.adb" 21 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:21:17] ([#"islands.adb" 21 0 0] [#"islands.adb" 21 0 0] (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 21 0 0] ( [@GP_Id:11] [@GP_Reason:VC_PRECONDITION] [@GP_Sloc:islands.adb:21:20] [@comment:      Vis_Array := Visit_Islands(Map_Array,  i, j + 1, Vis_Array);-- recur the right                    ^ islands.adb:21:20:VC_PRECONDITION] [@GP_Shape:vis_array_assign__call_visit_islands] [@vc:annotation] (Islands__visit_islands___axiom.visit_islands(Islands__visit_islands__map_array.map_array) (Islands__visit_islands__i.i) (([#"islands.adb" 21 0 0] ( [@GP_Id:10] [@vc:annotation] [@GP_Sloc:islands.adb:21:51] [@GP_Reason:VC_OVERFLOW_CHECK] [@GP_Shape:vis_array_assign__call_visit_islands__add] [@comment:      Vis_Array := Visit_Islands(Map_Array,  i, j + 1, Vis_Array);-- recur the right                                                   ^ islands.adb:21:51:VC_OVERFLOW_CHECK] (Standard__integer.range_check_((Islands__visit_islands__j.j + (1 : int)))) ))) (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content)) )) ))) );
+   ( [@GP_Sloc:islands.adb:22:7] ([#"islands.adb" 22 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:22:56] ([#"islands.adb" 22 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:22:20] ([#"islands.adb" 22 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:22:17] ([#"islands.adb" 22 0 0] [#"islands.adb" 22 0 0] (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 22 0 0] ( [@comment:      Vis_Array := Visit_Islands(Map_Array,  i, j - 1, Vis_Array);-- recur the left                    ^ islands.adb:22:20:VC_PRECONDITION] [@GP_Id:13] [@GP_Reason:VC_PRECONDITION] [@GP_Shape:vis_array_assign__call_visit_islands] [@vc:annotation] [@GP_Sloc:islands.adb:22:20] (Islands__visit_islands___axiom.visit_islands(Islands__visit_islands__map_array.map_array) (Islands__visit_islands__i.i) (([#"islands.adb" 22 0 0] ( [@GP_Id:12] [@vc:annotation] [@GP_Reason:VC_OVERFLOW_CHECK] [@GP_Shape:vis_array_assign__call_visit_islands__sub] [@GP_Sloc:islands.adb:22:51] [@comment:      Vis_Array := Visit_Islands(Map_Array,  i, j - 1, Vis_Array);-- recur the left                                                   ^ islands.adb:22:51:VC_OVERFLOW_CHECK] (Standard__integer.range_check_((Islands__visit_islands__j.j - (1 : int)))) ))) (Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content)) )) ))) );
+   ( [@GP_Sloc:islands.adb:24:14] ([#"islands.adb" 24 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:24:7] ([#"islands.adb" 24 0 0] ( [#"islands.adb" 24 0 0] (islands__visit_islands__result.Array__Int_Int__Bool.map__content <- ( Islands__visit_islands__vis_array.vis_array.Array__Int_Int__Bool.map__content ));
+   [#"islands.adb" 24 0 0] raise Return__exc )) );
+    raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+   begin ensures {true} let _ = (let _  = True in (
+   ()))
+   in () end ;
+  islands__visit_islands__result.Array__Int_Int__Bool.map__content )
+end
+
+(* Module for declaring an abstract function for the aggregate at islands.adb:29, created in Gnat2Why.Expr.Transform_Aggregate.Generate_Logic_Function *)
+module Islands__count_islands__visited_array__aggregate_def
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+
+ val function islands__count_islands__visited_array__aggregate_def 
+   (temp___220 : bool) : Array__Int_Int__Bool.map
+
+end
+
+(* Module for defining the value of the aggregate at islands.adb:29, created in Gnat2Why.Expr.Transform_Aggregate.Generate_Logic_Function *)
+module Islands__count_islands__visited_array__aggregate_def___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Islands__count_islands__visited_array__aggregate_def as Islands__count_islands__visited_array__aggregate_def
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+
+ axiom def_axiom :
+  (forall temp___220   : bool.
+   (let temp___219 [@mlw:proxy_symbol] [@introduced]  = (Islands__count_islands__visited_array__aggregate_def.islands__count_islands__visited_array__aggregate_def temp___220) in (
+    (forall temp___221   temp___222   : int.
+     ((Array__Int_Int__Bool.get temp___219 temp___221 temp___222) = temp___220))))
+  )
+
+end
+
+(* Module for defining the constant "map_array" defined at islands.ads:47, created in Gnat2Why.Decls.Translate_Constant *)
+module Islands__count_islands__map_array
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+
+ val constant map_array [#"islands.ads" 47 0 0][@model_trace:2806] [@model_projected] [@name:Map_Array] 
+   : Array__Int_Int__Islands__islands.map
+
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining a ref holding the value of variable "visited_array" defined at islands.adb:29, created in Gnat2Why.Decls.Translate_Variable *)
+module Islands__count_islands__visited_array
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+
+ val visited_array [#"islands.adb" 29 0 0][@model_projected] [@name:Visited_Array] [@model_trace:2464]  : Array__Int_Int__Bool.map__ref 
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining a ref holding the value of variable "count" defined at islands.adb:30, created in Gnat2Why.Decls.Translate_Variable *)
+module Islands__count_islands__count
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val count [#"islands.adb" 30 0 0][@model_projected] [@name:Count] [@model_trace:2480]  : int__ref 
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining a ref holding the value of variable "i" defined at islands.adb:35, created in Gnat2Why.Decls.Translate_Variable *)
+module Islands__count_islands__L_1__i
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val i [#"islands.adb" 35 0 0][@name:i] [@model_projected] [@model_trace:2501]  : int__ref 
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining a ref holding the value of variable "j" defined at islands.adb:36, created in Gnat2Why.Decls.Translate_Variable *)
+module Islands__count_islands__L_2__j
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ val j [#"islands.adb" 36 0 0][@name:j] [@model_projected] [@model_trace:2514]  : int__ref 
+ 
+ val constant attr__ATTRIBUTE_ADDRESS 
+   : int
+
+
+end
+
+(* Module for defining the loop exit exception for the loop "L_1" defined at islands.adb:35, created in Gnat2Why.Decls.Translate_Loop_Entity *)
+module Islands__count_islands__L_1
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ exception L_1
+
+end
+
+(* Module for defining the loop exit exception for the loop "L_2" defined at islands.adb:36, created in Gnat2Why.Decls.Translate_Loop_Entity *)
+module Islands__count_islands__L_2
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+ exception L_2
+
+end
+
+(* Module giving an empty axiom for the entity "visited_array" defined at islands.adb:29, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__count_islands__visited_array___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "count" defined at islands.adb:30, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__count_islands__count___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "i" defined at islands.adb:35, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__count_islands__L_1__i___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "j" defined at islands.adb:36, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__count_islands__L_2__j___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "L_2" defined at islands.adb:36, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__count_islands__L_2___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "L_1" defined at islands.adb:35, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__count_islands__L_1___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module giving an empty axiom for the entity "map_array" defined at islands.ads:47, created in Gnat2Why.Driver.Translate_Entity.Generate_Empty_Axiom_Theory *)
+module Islands__count_islands__map_array___axiom
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+
+
+end
+
+(* Module for checking contracts and absence of run-time errors in subprogram "count_islands" defined at islands.ads:47, created in Gnat2Why.Subprograms.Generate_VCs_For_Subprogram *)
+module Islands__count_islands__subprogram_def
+ use        "_gnatprove_standard".Main
+ use        "int".Int
+ use        "int".Int
+ use        "_gnatprove_standard".Main as Main
+ use        "_gnatprove_standard".Boolean as Boolean
+ use        Standard__integer as Standard__integer
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Islands__visit_islands___axiom as Islands__visit_islands___axiom
+ use        Islands__count_islands__map_array as Islands__count_islands__map_array
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Islands__count_islands__visited_array as Islands__count_islands__visited_array
+ use        Islands__count_islands__count as Islands__count_islands__count
+ use        Islands__count_islands__L_1__i as Islands__count_islands__L_1__i
+ use        Islands__count_islands__L_2__j as Islands__count_islands__L_2__j
+ use        Islands__islands as Islands__islands
+ use        Islands__islands__rep as Islands__islands__rep
+ use        Array__Int_Int__Islands__islands as Array__Int_Int__Islands__islands
+ use        Islands__map___axiom as Islands__map___axiom
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Islands__visited___axiom as Islands__visited___axiom
+ use        Islands__count_islands__L_1 as Islands__count_islands__L_1
+ use        Islands__count_islands__L_2 as Islands__count_islands__L_2
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Islands__count_islands__visited_array__aggregate_def as Islands__count_islands__visited_array__aggregate_def
+ use        Array__Int_Int__Bool as Array__Int_Int__Bool
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Standard__integer___axiom as Standard__integer___axiom
+ use        Islands__count_islands__visited_array___axiom as Islands__count_islands__visited_array___axiom
+ use        Islands__count_islands__visited_array__aggregate_def___axiom as Islands__count_islands__visited_array__aggregate_def___axiom
+ use        Islands__count_islands__count___axiom as Islands__count_islands__count___axiom
+ use        Islands__count_islands__L_1__i___axiom as Islands__count_islands__L_1__i___axiom
+ use        Islands__count_islands__L_2__j___axiom as Islands__count_islands__L_2__j___axiom
+ use        Islands__count_islands__L_2___axiom as Islands__count_islands__L_2___axiom
+ use        Islands__count_islands__L_1___axiom as Islands__count_islands__L_1___axiom
+ use        Islands__islands___axiom as Islands__islands___axiom
+ use        Islands__map___axiom as Islands__map___axiom
+ use        Islands__visited___axiom as Islands__visited___axiom
+ use        Islands__visit_islands___axiom as Islands__visit_islands___axiom
+ use        Islands__count_islands__map_array___axiom as Islands__count_islands__map_array___axiom
+
+ val islands__count_islands__result [@model_projected] [@name:Count_Islands] [@model_trace:2799@result]  : int__ref 
+ 
+ let def [#"islands.ads" 47 0 0][@GP_Subp:islands.ads:47] 
+   (__void_param : unit)
+  requires { [#"islands.ads" 47 0 0] true }
+  ensures { [#"islands.ads" 47 0 0] ([#"islands.ads" 49 0 0] ( [@GP_Reason:VC_POSTCONDITION] [@GP_Id:16] [@GP_Shape:pragargs__cmp] [@comment:     Post => Count_Islands'Result = N + N * (M - 1);              ^ islands.ads:49:14:VC_POSTCONDITION] [@model_vc_post] [@GP_Sloc:islands.ads:49:14] ( [@GP_Pretty_Ada:2931] [@GP_Sloc:islands.ads:49:14] (islands__count_islands__result.int__content = (20 : int)) ) )) }
+   = [@vc:divergent]
+  ( () (* Assume dynamic invariants of inputs of the subprogram islands.ads:47 *)
+  ;
+   assume {  (Islands__map___axiom.dynamic_invariant Islands__count_islands__map_array.map_array True False True True) };
+  () (* Declarations introduced by the compiler at the beginning of the subprogram islands.ads:47 *)
+  ;
+  () (* Check for RTE in the Pre of the subprogram islands.ads:47 *)
+  ;
+   begin ensures {true} let _ = (let _  = (Boolean.of_int((1 : int))) in (
+   ()))
+   in () end ;
+  () (* Assume Pre of the subprogram islands.ads:47 *)
+  ;
+   assume {  ( [@GP_Pretty_Ada:2914] true ) };
+   try
+   ( ();
+   ([#"islands.adb" 29 0 0] ( [#"islands.adb" 29 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( (Islands__count_islands__visited_array__aggregate_def.islands__count_islands__visited_array__aggregate_def((Boolean.of_int((0 : int))))) ));
+   [#"islands.adb" 29 0 0] assume { [#"islands.adb" 29 0 0] (Islands__visited___axiom.dynamic_invariant Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content True False True True) } ));
+   ([#"islands.adb" 30 0 0] ( [#"islands.adb" 30 0 0] (Islands__count_islands__count.count.int__content <- ( (0 : int) ));
+   [#"islands.adb" 30 0 0] assume { [#"islands.adb" 30 0 0] (Standard__integer___axiom.dynamic_invariant Islands__count_islands__count.count.int__content True False True True) } ));
+   ([#"islands.adb" 36 0 0] ());
+   ([#"islands.adb" 35 0 0] ());
+   ();
+   ( [@GP_Sloc:islands.adb:32:7] ([#"islands.adb" 32 0 0] (if (( ([#"islands.adb" 32 0 0] [#"islands.adb" 32 0 0] (([@branch_id=2491] Main.spark__branch).bool__content <- ( (Boolean.of_int((0 : int))) )));
+   ( [@branch_id=2491] Main.spark__branch ).bool__content )) then (
+    ( ();
+    ( [@GP_Sloc:islands.adb:33:10] ([#"islands.adb" 33 0 0] ( [#"islands.adb" 33 0 0] (islands__count_islands__result.int__content <- ( (0 : int) ));
+    [#"islands.adb" 33 0 0] raise Return__exc )) ) )) else (
+    ()))) );
+   ( [@GP_Sloc:islands.adb:35:24] ([#"islands.adb" 35 0 0] (let temp___223 [@mlw:proxy_symbol] [@introduced]  = (1 : int) in (
+   (let temp___224 [@mlw:proxy_symbol] [@introduced]  = (4 : int) in (
+    ( () (* Translation of an unrolled Ada loop from islands.adb:35 *)
+    ;
+    [#"islands.adb" 35 0 0] try
+     ( [#"islands.adb" 35 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__count.count.int__content in (
+      ()))
+      in () end ;
+     (let temp___loop_entry_230  = [#"islands.adb" 35 0 0] (val _f : int
+     ensures {[#"islands.adb" 35 0 0] (result = Islands__count_islands__count.count.int__content)} 
+     in _f) in (
+      ( [#"islands.adb" 35 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content in (
+       ()))
+       in () end ;
+      (let temp___loop_entry_229  = [#"islands.adb" 35 0 0] (val _f : Array__Int_Int__Bool.map
+      ensures {[#"islands.adb" 35 0 0] (result = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)} 
+      in _f) in (
+       ( () (* Unrolling of the loop statements of loop islands.adb:35 *)
+       ;
+       [#"islands.adb" 35 0 0] (Islands__count_islands__L_1__i.i.int__content <- ( (1 : int) ));
+       ();
+       ( [@GP_Sloc:islands.adb:36:27] ([#"islands.adb" 36 0 0] (let temp___225 [@mlw:proxy_symbol] [@introduced]  = (1 : int) in (
+       (let temp___226 [@mlw:proxy_symbol] [@introduced]  = (5 : int) in (
+        ( () (* Translation of an unrolled Ada loop from islands.adb:36 *)
+        ;
+        [#"islands.adb" 36 0 0] try
+         ( [#"islands.adb" 36 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__count.count.int__content in (
+          ()))
+          in () end ;
+         (let temp___loop_entry_228  = [#"islands.adb" 36 0 0] (val _f : int
+         ensures {[#"islands.adb" 36 0 0] (result = Islands__count_islands__count.count.int__content)} 
+         in _f) in (
+          ( [#"islands.adb" 36 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content in (
+           ()))
+           in () end ;
+          (let temp___loop_entry_227  = [#"islands.adb" 36 0 0] (val _f : Array__Int_Int__Bool.map
+          ensures {[#"islands.adb" 36 0 0] (result = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)} 
+          in _f) in (
+           ( () (* Unrolling of the loop statements of loop islands.adb:36 *)
+           ;
+           [#"islands.adb" 36 0 0] (Islands__count_islands__L_2__j.j.int__content <- ( (1 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (2 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (3 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (4 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (5 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) ) )))
+           )))
+          )
+        with
+         Islands__count_islands__L_2.L_2 -> ()
+        end )))
+       ))
+       ) );
+        (Islands__count_islands__L_1__i.i.int__content <- ( (2 : int) ));
+       ();
+       ( [@GP_Sloc:islands.adb:36:27] ([#"islands.adb" 36 0 0] (let temp___225 [@mlw:proxy_symbol] [@introduced]  = (1 : int) in (
+       (let temp___226 [@mlw:proxy_symbol] [@introduced]  = (5 : int) in (
+        ( () (* Translation of an unrolled Ada loop from islands.adb:36 *)
+        ;
+        [#"islands.adb" 36 0 0] try
+         ( [#"islands.adb" 36 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__count.count.int__content in (
+          ()))
+          in () end ;
+         (let temp___loop_entry_228  = [#"islands.adb" 36 0 0] (val _f : int
+         ensures {[#"islands.adb" 36 0 0] (result = Islands__count_islands__count.count.int__content)} 
+         in _f) in (
+          ( [#"islands.adb" 36 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content in (
+           ()))
+           in () end ;
+          (let temp___loop_entry_227  = [#"islands.adb" 36 0 0] (val _f : Array__Int_Int__Bool.map
+          ensures {[#"islands.adb" 36 0 0] (result = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)} 
+          in _f) in (
+           ( () (* Unrolling of the loop statements of loop islands.adb:36 *)
+           ;
+           [#"islands.adb" 36 0 0] (Islands__count_islands__L_2__j.j.int__content <- ( (1 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (2 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (3 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (4 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (5 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) ) )))
+           )))
+          )
+        with
+         Islands__count_islands__L_2.L_2 -> ()
+        end )))
+       ))
+       ) );
+        (Islands__count_islands__L_1__i.i.int__content <- ( (3 : int) ));
+       ();
+       ( [@GP_Sloc:islands.adb:36:27] ([#"islands.adb" 36 0 0] (let temp___225 [@mlw:proxy_symbol] [@introduced]  = (1 : int) in (
+       (let temp___226 [@mlw:proxy_symbol] [@introduced]  = (5 : int) in (
+        ( () (* Translation of an unrolled Ada loop from islands.adb:36 *)
+        ;
+        [#"islands.adb" 36 0 0] try
+         ( [#"islands.adb" 36 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__count.count.int__content in (
+          ()))
+          in () end ;
+         (let temp___loop_entry_228  = [#"islands.adb" 36 0 0] (val _f : int
+         ensures {[#"islands.adb" 36 0 0] (result = Islands__count_islands__count.count.int__content)} 
+         in _f) in (
+          ( [#"islands.adb" 36 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content in (
+           ()))
+           in () end ;
+          (let temp___loop_entry_227  = [#"islands.adb" 36 0 0] (val _f : Array__Int_Int__Bool.map
+          ensures {[#"islands.adb" 36 0 0] (result = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)} 
+          in _f) in (
+           ( () (* Unrolling of the loop statements of loop islands.adb:36 *)
+           ;
+           [#"islands.adb" 36 0 0] (Islands__count_islands__L_2__j.j.int__content <- ( (1 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (2 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (3 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (4 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (5 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) ) )))
+           )))
+          )
+        with
+         Islands__count_islands__L_2.L_2 -> ()
+        end )))
+       ))
+       ) );
+        (Islands__count_islands__L_1__i.i.int__content <- ( (4 : int) ));
+       ();
+       ( [@GP_Sloc:islands.adb:36:27] ([#"islands.adb" 36 0 0] (let temp___225 [@mlw:proxy_symbol] [@introduced]  = (1 : int) in (
+       (let temp___226 [@mlw:proxy_symbol] [@introduced]  = (5 : int) in (
+        ( () (* Translation of an unrolled Ada loop from islands.adb:36 *)
+        ;
+        [#"islands.adb" 36 0 0] try
+         ( [#"islands.adb" 36 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__count.count.int__content in (
+          ()))
+          in () end ;
+         (let temp___loop_entry_228  = [#"islands.adb" 36 0 0] (val _f : int
+         ensures {[#"islands.adb" 36 0 0] (result = Islands__count_islands__count.count.int__content)} 
+         in _f) in (
+          ( [#"islands.adb" 36 0 0] begin ensures {true} let _ = (let _  = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content in (
+           ()))
+           in () end ;
+          (let temp___loop_entry_227  = [#"islands.adb" 36 0 0] (val _f : Array__Int_Int__Bool.map
+          ensures {[#"islands.adb" 36 0 0] (result = Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)} 
+          in _f) in (
+           ( () (* Unrolling of the loop statements of loop islands.adb:36 *)
+           ;
+           [#"islands.adb" 36 0 0] (Islands__count_islands__L_2__j.j.int__content <- ( (1 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (2 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (3 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (4 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) );
+            (Islands__count_islands__L_2__j.j.int__content <- ( (5 : int) ));
+           ();
+           ( [@GP_Sloc:islands.adb:37:13] ([#"islands.adb" 37 0 0] (if (( ([#"islands.adb" 37 0 0] [#"islands.adb" 37 0 0] (([@branch_id=2525] Main.spark__branch).bool__content <- ( ( ((Islands__islands__rep.to_rep((Array__Int_Int__Islands__islands.get(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)))) = (1 : int)) && not ( (Array__Int_Int__Bool.get(Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content)) ) ) )));
+           ( [@branch_id=2525] Main.spark__branch ).bool__content )) then (
+            ( ();
+            ( [@GP_Sloc:islands.adb:38:16] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:64] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:33] ([#"islands.adb" 38 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:38:30] ([#"islands.adb" 38 0 0] [#"islands.adb" 38 0 0] (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content <- ( ([#"islands.adb" 38 0 0] ( [@GP_Reason:VC_PRECONDITION] [@GP_Id:14] [@comment:               Visited_Array := Visit_Islands(Map_Array, i, j, Visited_Array);                                 ^ islands.adb:38:33:VC_PRECONDITION] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__visited_array_assign__call_visit_islands] [@GP_Sloc:islands.adb:38:33] (Islands__visit_islands___axiom.visit_islands(Islands__count_islands__map_array.map_array) (Islands__count_islands__L_1__i.i.int__content) (Islands__count_islands__L_2__j.j.int__content) (Islands__count_islands__visited_array.visited_array.Array__Int_Int__Bool.map__content)) )) ))) );
+            ( [@GP_Sloc:islands.adb:40:16] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:25] ([#"islands.adb" 40 0 0] ()) );
+            ( [@GP_Sloc:islands.adb:40:22] ([#"islands.adb" 40 0 0] [#"islands.adb" 40 0 0] (Islands__count_islands__count.count.int__content <- ( ([#"islands.adb" 40 0 0] ( [@GP_Id:15] [@vc:annotation] [@GP_Shape:L_1_while__L_2_while__if__count_assign__add] [@GP_Reason:VC_OVERFLOW_CHECK] [@comment:               Count := Count + 1;                               ^ islands.adb:40:31:VC_OVERFLOW_CHECK] [@GP_Sloc:islands.adb:40:31] (Standard__integer.range_check_((Islands__count_islands__count.count.int__content + (1 : int)))) )) ))) ) )) else (
+            ()))) ) )))
+           )))
+          )
+        with
+         Islands__count_islands__L_2.L_2 -> ()
+        end )))
+       ))
+       ) ) )))
+       )))
+      )
+    with
+     Islands__count_islands__L_1.L_1 -> ()
+    end )))
+   ))
+   ) );
+   ( [@GP_Sloc:islands.adb:45:14] ([#"islands.adb" 45 0 0] ()) );
+   ( [@GP_Sloc:islands.adb:45:7] ([#"islands.adb" 45 0 0] ( [#"islands.adb" 45 0 0] (islands__count_islands__result.int__content <- ( Islands__count_islands__count.count.int__content ));
+   [#"islands.adb" 45 0 0] raise Return__exc )) );
+    raise Return__exc )
+  with
+   Return__exc -> ()
+  end;
+   begin ensures {true} let _ = (let _  = (islands__count_islands__result.int__content = (20 : int)) in (
+   ()))
+   in () end ;
+  islands__count_islands__result.int__content )
+end

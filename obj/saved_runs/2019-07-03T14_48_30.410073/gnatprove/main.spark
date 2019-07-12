@@ -1,0 +1,78 @@
+{
+  "spark": [
+    {
+      "name": "Main",
+      "sloc": [
+        {
+          "file": "main.adb",
+          "line": 2
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Main.Count_Islands",
+      "sloc": [
+        {
+          "file": "main.adb",
+          "line": 15
+        }
+      ],
+      "spark": "all"
+    }
+  ],
+  "flow": [
+  ],
+  "assumptions": [
+    {
+      "assumptions": [
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Main.Count_Islands",
+          "sloc": [
+            {
+              "file": "main.adb",
+              "line": 15
+            }
+          ]
+        }
+      }
+    },
+    {
+      "assumptions": [
+        {
+          "predicate": "CLAIM_EFFECTS",
+          "arg": {
+            "name": "Ada.Text_IO.Put_Line",
+            "sloc": [
+              {
+                "file": "a-textio.ads",
+                "line": 508
+              }
+            ]
+          }
+        }
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Main",
+          "sloc": [
+            {
+              "file": "main.adb",
+              "line": 2
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "timings": {
+    "marking": 6.21399981901050E-03,
+    "globals (basic)": 2.96900002285838E-03,
+    "globals/properties (advanced)": 2.51200003549457E-03,
+    "flow analysis": 4.26399987190962E-03
+  }
+}

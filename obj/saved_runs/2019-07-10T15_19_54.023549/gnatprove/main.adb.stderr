@@ -1,0 +1,3 @@
+main.adb:3:11: warning: "Count" is not modified, could be INPUT[#0]
+main.adb:3:11: warning: "Visited_Array" is not modified, could be INPUT[#1]
+main.adb:19:32: side effects of function "Count_Islands" are not modeled in SPARK

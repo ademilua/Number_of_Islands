@@ -1,0 +1,8 @@
+islands.adb:18:20: medium: precondition might fail, cannot prove I < N + 1 (e.g. when I = 4)[#0]
+islands.adb:20:20: medium: precondition might fail, cannot prove J < M + 1 (e.g. when J = 5)[#1]
+islands.adb:39:31: medium: overflow check might fail[#7]
+islands.ads:34:39: medium: array index check might fail (e.g. when I = 0)[#3]
+islands.ads:34:41: medium: array index check might fail[#4]
+islands.ads:35:39: medium: array index check might fail (e.g. when I = 0)[#5]
+islands.ads:35:41: medium: array index check might fail[#6]
+islands.ads:35:52: medium: contract case might fail[#2]

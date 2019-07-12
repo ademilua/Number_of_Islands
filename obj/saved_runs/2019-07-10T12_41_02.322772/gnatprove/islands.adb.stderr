@@ -1,0 +1,4 @@
+islands.adb:39:31: medium: overflow check might fail[#0]
+islands.ads:34:27: warning: contract cases do not mention result
+islands.ads:34:58: warning: contract case does not check the outcome of calling "Visit_Islands"
+islands.ads:34:60: warning: attribute "Old" applied to constant has no effect

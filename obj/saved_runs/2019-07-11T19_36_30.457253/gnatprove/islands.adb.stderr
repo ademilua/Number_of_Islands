@@ -1,0 +1,1 @@
+islands.adb:60:13: medium: loop invariant might fail in first iteration, cannot prove A = (I - N_Range'First) * M (e.g. when A = 1 and I = 1)[#0]

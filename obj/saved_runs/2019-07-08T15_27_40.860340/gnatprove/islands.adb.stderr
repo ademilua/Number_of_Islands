@@ -1,0 +1,2 @@
+islands.adb:41:33: medium: precondition might fail, cannot prove N_Range(I) = M (e.g. when I = 1)[#0]
+islands.adb:42:31: medium: overflow check might fail[#1]

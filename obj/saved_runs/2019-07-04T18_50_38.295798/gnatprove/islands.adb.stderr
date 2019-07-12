@@ -1,0 +1,2 @@
+islands.ads:7:42: subtype constraint cannot depend on variable input "N" (SPARK RM 4.4(2))[#0]
+islands.ads:9:42: subtype constraint cannot depend on variable input "M" (SPARK RM 4.4(2))[#1]

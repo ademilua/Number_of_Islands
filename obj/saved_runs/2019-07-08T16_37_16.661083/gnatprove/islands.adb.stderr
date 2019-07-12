@@ -1,0 +1,2 @@
+islands.adb:42:31: medium: overflow check might fail[#0]
+islands.ads:41:66: medium: postcondition might fail, cannot prove Count_Islands'Result < N_Range(I) * M_Range(j) (e.g. when Count_Islands'Result = 1 and i = 1 and j = 1)[#1]

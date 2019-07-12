@@ -1,0 +1,1 @@
+main.adb:19:32: medium: "Count" might not be initialized after elaboration of main program "Main"[#0]

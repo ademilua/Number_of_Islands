@@ -1,0 +1,1 @@
+islands.adb:60:13: medium: loop invariant might fail after first iteration, cannot prove A = (I - N_Range'First) * Map_Array'length (e.g. when A = 0 and I = 2)[#0]

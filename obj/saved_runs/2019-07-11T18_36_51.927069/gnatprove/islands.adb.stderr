@@ -1,0 +1,1 @@
+islands.adb:50:33: medium: precondition might fail, cannot prove Map_Array'Length(1) = N and Map_Array'Length(1) = M[#0]

@@ -1,0 +1,27 @@
+Summary of SPARK analysis
+=========================
+
+-----------------------------------------------------------------------------------------------------------------------
+SPARK Analysis results        Total      Flow   Interval   CodePeer                      Provers   Justified   Unproved
+-----------------------------------------------------------------------------------------------------------------------
+Data Dependencies                 .         .          .          .                            .           .          .
+Flow Dependencies                 .         .          .          .                            .           .          .
+Initialization                    .         .          .          .                            .           .          .
+Non-Aliasing                      .         .          .          .                            .           .          .
+Run-time Checks                  12         .          .          .                    12 (CVC4)           .          .
+Assertions                        .         .          .          .                            .           .          .
+Functional Contracts              6         .          .          .    5 (CVC4 67%, Trivial 33%)           .          1
+LSP Verification                  .         .          .          .                            .           .          .
+-----------------------------------------------------------------------------------------------------------------------
+Total                            18         .          .          .                     17 (94%)           .     1 (6%)
+
+
+max steps used for successful proof: 1
+
+Analyzed 2 units
+in unit islands, 3 subprograms and packages out of 3 analyzed
+  Islands at islands.ads:1 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (0 checks)
+  Islands.Count_Islands at islands.ads:40 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (2 checks)
+  Islands.Visit_Islands at islands.ads:31 flow analyzed (0 errors, 0 checks and 0 warnings) and proved (14 checks)
+in unit main, 1 subprograms and packages out of 1 analyzed
+  Main at main.adb:3 flow analyzed (0 errors, 0 checks and 0 warnings) and not proved, 1 checks out of 2 proved

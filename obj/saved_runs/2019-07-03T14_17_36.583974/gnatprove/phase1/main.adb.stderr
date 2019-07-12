@@ -1,0 +1,1 @@
+main.adb:23:40: there is no applicable operator "Or" for type "Int_Needed" defined at line 11

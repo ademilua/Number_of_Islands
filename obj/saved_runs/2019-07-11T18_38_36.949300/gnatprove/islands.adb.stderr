@@ -1,0 +1,1 @@
+islands.ads:48:10: medium: postcondition might fail, cannot prove Count_Islands'Result in Map_Array'range (e.g. when Count_Islands'Result = 5 and i = 1 and j = 1)[#0]

@@ -1,0 +1,8 @@
+main.adb:37:07: warning: initialization of "Matrix" has no effect[#0]
+main.adb:38:07: warning: initialization of "Vis_Array" has no effect[#1]
+main.adb:39:07: warning: initialization of "Visited_Cell" has no effect[#2]
+main.adb:43:23: warning: unused assignment[#3]
+main.adb:44:20: warning: unused assignment[#4]
+main.adb:45:20: warning: unused assignment[#5]
+main.adb:46:20: warning: unused assignment[#6]
+main.adb:47:20: warning: unused assignment[#7]

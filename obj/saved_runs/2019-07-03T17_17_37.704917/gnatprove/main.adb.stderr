@@ -1,0 +1,7 @@
+main.adb:20:07: warning: initialization of "Matrix" has no effect[#0]
+main.adb:22:07: warning: initialization of "Visited" has no effect[#1]
+main.adb:29:19: warning: unused assignment[#2]
+main.adb:30:15: warning: unused assignment[#3]
+main.adb:31:15: warning: unused assignment[#4]
+main.adb:32:15: warning: unused assignment[#5]
+main.adb:33:15: warning: unused assignment[#6]

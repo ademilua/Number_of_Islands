@@ -1,0 +1,4 @@
+islands.adb:42:31: medium: overflow check might fail[#0]
+islands.ads:41:18: warning: conjunct in postcondition does not check the outcome of calling "Count_Islands"
+islands.ads:41:63: warning: conjunct in postcondition does not check the outcome of calling "Count_Islands"
+islands.ads:41:108: medium: postcondition might fail, cannot prove Count_Islands'Result <= N * M[#1]

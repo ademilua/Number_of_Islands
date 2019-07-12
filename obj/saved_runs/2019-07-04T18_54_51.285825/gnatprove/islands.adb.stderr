@@ -1,0 +1,3 @@
+islands.adb:39:31: medium: overflow check might fail[#2]
+islands.ads:20:85: low: unused global "Water"[#0]
+islands.ads:20:91: low: unused global "Land"[#1]

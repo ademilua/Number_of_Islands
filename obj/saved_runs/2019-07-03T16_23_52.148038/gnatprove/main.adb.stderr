@@ -1,0 +1,4 @@
+main.adb:15:14: warning: subprogram "Visit_Islands" has no effect[#0]
+main.adb:22:14: medium: array index check might fail [possible explanation: subprogram at line 15 should mention i in a precondition][#1]
+main.adb:22:17: medium: array index check might fail (e.g. when j = 6) [possible explanation: subprogram at line 15 should mention j in a precondition][#2]
+main.adb:42:31: medium: overflow check might fail[#3]

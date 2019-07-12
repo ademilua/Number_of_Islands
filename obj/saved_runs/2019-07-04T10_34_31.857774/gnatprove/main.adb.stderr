@@ -1,0 +1,10 @@
+main.adb:17:04: warning: analyzing unreferenced function "Is_Unvisited_Land"
+main.adb:30:44: warning: unused initial value of "Visited_Array"[#0]
+main.adb:34:07: warning: initialization of "Vis_Array" has no effect[#1]
+main.adb:35:07: warning: initialization of "Visited_Cell" has no effect[#2]
+main.adb:43:19: warning: unused assignment[#3]
+main.adb:44:20: warning: unused assignment[#4]
+main.adb:45:20: warning: unused assignment[#5]
+main.adb:46:20: warning: unused assignment[#6]
+main.adb:47:20: warning: unused assignment[#7]
+main.adb:48:23: warning: unused assignment[#8]

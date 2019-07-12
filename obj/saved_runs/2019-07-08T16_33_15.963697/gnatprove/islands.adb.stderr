@@ -1,0 +1,4 @@
+islands.adb:42:31: medium: overflow check might fail[#0]
+islands.ads:41:26: warning: unused variable "i"
+islands.ads:41:58: warning: unused variable "j"
+islands.ads:41:81: medium: postcondition might fail, cannot prove Count_Islands'Result < N * M[#1]

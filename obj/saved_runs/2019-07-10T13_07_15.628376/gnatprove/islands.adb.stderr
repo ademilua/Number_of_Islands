@@ -1,0 +1,10 @@
+islands.adb:18:20: medium: precondition might fail, cannot prove I = 4 (e.g. when I = 4)[#1]
+islands.adb:19:20: medium: precondition might fail, cannot prove I = 4 (e.g. when I = 4)[#2]
+islands.adb:20:20: medium: precondition might fail, cannot prove J = 5 (e.g. when J = 5)[#3]
+islands.adb:21:20: medium: precondition might fail, cannot prove J = 5 (e.g. when J = 5)[#4]
+islands.adb:37:33: medium: precondition might fail, cannot prove I = 4 (e.g. when i = 1)[#5]
+islands.adb:39:31: medium: overflow check might fail[#6]
+islands.ads:34:26: warning: contract cases do not mention result
+islands.ads:34:26: medium: contract cases might not be complete (e.g. when I = 4 and J = 5)[#0]
+islands.ads:34:90: warning: contract case does not check the outcome of calling "Visit_Islands"
+islands.ads:34:92: warning: attribute "Old" applied to constant has no effect

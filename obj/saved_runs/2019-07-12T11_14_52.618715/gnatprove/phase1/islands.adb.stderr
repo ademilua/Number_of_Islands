@@ -1,0 +1,2 @@
+islands.adb:81:01: missing "begin" for function "Count_Islands" at line 26
+islands.adb:81:01: "end Count_Islands;" expected

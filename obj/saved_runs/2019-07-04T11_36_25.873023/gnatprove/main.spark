@@ -1,0 +1,199 @@
+{
+  "spark": [
+    {
+      "name": "Main",
+      "sloc": [
+        {
+          "file": "main.adb",
+          "line": 2
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Main.Is_Unvisited_Land",
+      "sloc": [
+        {
+          "file": "main.adb",
+          "line": 17
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Main.Visit_Island",
+      "sloc": [
+        {
+          "file": "main.adb",
+          "line": 29
+        }
+      ],
+      "spark": "all"
+    },
+    {
+      "name": "Main.Count_Islands",
+      "sloc": [
+        {
+          "file": "main.adb",
+          "line": 95
+        }
+      ],
+      "spark": "all"
+    }
+  ],
+  "flow": [
+    {
+      "file": "main.adb",
+      "line": 97,
+      "col": 7,
+      "rule": "INEFFECTIVE",
+      "severity": "warning",
+      "entity": {
+        "name": "Main.Count_Islands",
+        "sloc": [
+          {
+            "file": "main.adb",
+            "line": 95
+          }
+        ]
+      },
+      "check_tree": {
+      },
+      "tracefile": "main__flow__0.trace",
+      "msg_id": 0,
+      "how_proved": "flow"
+    },
+    {
+      "file": "main.adb",
+      "line": 106,
+      "col": 16,
+      "rule": "INEFFECTIVE",
+      "severity": "warning",
+      "entity": {
+        "name": "Main.Count_Islands",
+        "sloc": [
+          {
+            "file": "main.adb",
+            "line": 95
+          }
+        ]
+      },
+      "check_tree": {
+      },
+      "msg_id": 1,
+      "how_proved": "flow"
+    },
+    {
+      "file": "main.adb",
+      "line": 106,
+      "col": 40,
+      "rule": "INEFFECTIVE",
+      "severity": "warning",
+      "entity": {
+        "name": "Main.Count_Islands",
+        "sloc": [
+          {
+            "file": "main.adb",
+            "line": 95
+          }
+        ]
+      },
+      "check_tree": {
+      },
+      "msg_id": 2,
+      "how_proved": "flow"
+    }
+  ],
+  "assumptions": [
+    {
+      "assumptions": [
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Main.Is_Unvisited_Land",
+          "sloc": [
+            {
+              "file": "main.adb",
+              "line": 17
+            }
+          ]
+        }
+      }
+    },
+    {
+      "assumptions": [
+        {
+          "predicate": "CLAIM_EFFECTS",
+          "arg": {
+            "name": "Main.Is_Unvisited_Land",
+            "sloc": [
+              {
+                "file": "main.adb",
+                "line": 17
+              }
+            ]
+          }
+        }
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Main.Visit_Island",
+          "sloc": [
+            {
+              "file": "main.adb",
+              "line": 29
+            }
+          ]
+        }
+      }
+    },
+    {
+      "assumptions": [
+        {
+          "predicate": "CLAIM_EFFECTS",
+          "arg": {
+            "name": "Ada.Text_IO.Put_Line",
+            "sloc": [
+              {
+                "file": "a-textio.ads",
+                "line": 508
+              }
+            ]
+          }
+        },
+        {
+          "predicate": "CLAIM_EFFECTS",
+          "arg": {
+            "name": "Main.Count_Islands",
+            "sloc": [
+              {
+                "file": "main.adb",
+                "line": 95
+              }
+            ]
+          }
+        }
+      ],
+      "claim": {
+        "predicate": "CLAIM_EFFECTS",
+        "arg": {
+          "name": "Main",
+          "sloc": [
+            {
+              "file": "main.adb",
+              "line": 2
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "timings": {
+    "marking": 4.66499989852309E-03,
+    "globals (basic)": 2.37199990078807E-03,
+    "globals/properties (advanced)": 2.42300005629659E-03,
+    "flow analysis": 5.96999982371926E-03
+  }
+}

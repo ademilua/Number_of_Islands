@@ -1,0 +1,5 @@
+islands.adb:42:31: medium: overflow check might fail[#0]
+islands.ads:41:09: warning: postcondition does not check the outcome of calling "Count_Islands"
+islands.ads:41:09: warning: postcondition does not mention function result
+islands.ads:41:79: medium: postcondition might fail, cannot prove Map_Array(i,j) < Map_Array'Old(i,j) (e.g. when i = 1 and j = 1)[#1]
+islands.ads:41:96: warning: attribute "Old" applied to constant has no effect

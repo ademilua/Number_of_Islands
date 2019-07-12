@@ -1,0 +1,4 @@
+islands.adb:38:31: medium: overflow check might fail[#0]
+islands.ads:48:05: warning: postcondition does not mention function result
+islands.ads:48:13: medium: postcondition might fail, cannot prove Islands'Succ(Islands'Pred(The_Water)) = The_Land (e.g. when The_Land = Land and The_Water = Water)[#2]
+islands.ads:48:39: medium: range check might fail (e.g. when The_Water = Water)[#1]

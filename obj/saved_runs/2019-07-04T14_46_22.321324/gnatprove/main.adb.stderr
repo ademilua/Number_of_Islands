@@ -1,0 +1,12 @@
+main.adb:18:04: warning: analyzing unreferenced function "Is_Unvisited_Land"
+main.adb:62:07: warning: initialization of "Visited_Cell" has no effect[#0]
+main.adb:70:20: warning: unused assignment[#1]
+main.adb:71:23: warning: unused assignment[#2]
+main.adb:72:07: warning: statement has no effect[#3]
+main.adb:73:23: warning: unused assignment[#4]
+main.adb:75:07: warning: statement has no effect[#5]
+main.adb:76:22: warning: unused assignment[#6]
+main.adb:78:07: warning: statement has no effect[#7]
+main.adb:79:23: warning: unused assignment[#8]
+main.adb:81:07: warning: statement has no effect[#9]
+main.adb:82:23: warning: unused assignment[#10]

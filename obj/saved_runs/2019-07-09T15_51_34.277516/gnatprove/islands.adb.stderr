@@ -1,0 +1,2 @@
+islands.adb:42:31: medium: overflow check might fail[#0]
+islands.ads:41:55: medium: postcondition might fail, cannot prove Count_Islands'Result > -1[#1]

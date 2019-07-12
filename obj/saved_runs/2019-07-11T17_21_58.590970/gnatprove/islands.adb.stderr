@@ -1,0 +1,1 @@
+islands.ads:46:14: medium: postcondition might fail, cannot prove Count_Islands'Result < N * M (e.g. when Count_Islands'Result = 20)[#0]

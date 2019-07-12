@@ -1,0 +1,2 @@
+islands.ads:18:62: global mode "Output" is not applicable to functions
+islands.ads:18:72: global item cannot reference parameter of subprogram "Visit_Islands"

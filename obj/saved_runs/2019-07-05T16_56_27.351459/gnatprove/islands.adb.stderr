@@ -1,0 +1,2 @@
+islands.adb:43:31: medium: assertion might fail, cannot prove Count < N * M[#0]
+islands.adb:45:34: medium: overflow check might fail[#1]

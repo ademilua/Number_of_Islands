@@ -1,0 +1,5 @@
+islands.adb:33:07: warning: initialization of "Incremented" has no effect[#0]
+islands.adb:41:34: medium: overflow check might fail[#4]
+islands.adb:43:28: warning: unused assignment[#1]
+islands.adb:45:28: warning: unused assignment[#2]
+islands.ads:32:15: medium: postcondition might fail, cannot prove Visit_Islands'Result = Visited_Array[#3]

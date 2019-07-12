@@ -1,0 +1,2 @@
+islands.adb:57:13: medium: loop invariant might fail after first iteration, cannot prove B = Map_Array'length (e.g. when B = 5)[#0]
+islands.adb:57:13: medium: loop invariant might fail in first iteration, cannot prove B = Map_Array'length (e.g. when B = 5)[#1]

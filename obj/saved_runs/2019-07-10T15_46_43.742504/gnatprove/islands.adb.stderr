@@ -1,0 +1,1 @@
+islands.adb:38:32: medium: assertion might fail, cannot prove Count < Count (e.g. when Count = 0)[#0]

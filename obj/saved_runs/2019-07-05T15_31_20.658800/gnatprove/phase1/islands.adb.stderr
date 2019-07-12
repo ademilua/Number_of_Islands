@@ -1,0 +1,4 @@
+islands.adb:27:04: body conflicts with expression function at islands.ads:35
+islands.adb:27:13: "Count_Islands" conflicts with declaration at islands.ads:35
+islands.ads:36:07: "Incremented" is undefined
+islands.ads:36:18: missing ")"

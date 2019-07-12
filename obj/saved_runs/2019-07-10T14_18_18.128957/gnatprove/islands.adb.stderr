@@ -1,0 +1,6 @@
+islands.adb:39:31: medium: overflow check might fail[#4]
+islands.ads:34:39: medium: array index check might fail (e.g. when I = 5) [possible explanation: subprogram at line 31 should mention I in a precondition][#0]
+islands.ads:34:41: medium: array index check might fail (e.g. when J = 6) [possible explanation: subprogram at line 31 should mention J in a precondition][#1]
+islands.ads:35:39: medium: array index check might fail [possible explanation: subprogram at line 31 should mention I in a precondition][#2]
+islands.ads:35:41: medium: array index check might fail (e.g. when J = 6) [possible explanation: subprogram at line 31 should mention J in a precondition][#3]
+islands.ads:35:69: warning: contract case does not check the outcome of calling "Visit_Islands"

@@ -1,0 +1,1 @@
+islands.ads:50:14: medium: postcondition might fail, cannot prove Count_Islands'Result < Map_Array'Length (1) * Map_Array'length (e.g. when Count_Islands'Result = 20)[#0]

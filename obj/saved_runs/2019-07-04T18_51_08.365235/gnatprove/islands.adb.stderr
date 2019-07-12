@@ -1,0 +1,2 @@
+islands.ads:18:48: medium: constant without variable input "N" cannot appear in Globals[#0]
+islands.ads:18:51: medium: constant without variable input "M" cannot appear in Globals[#1]

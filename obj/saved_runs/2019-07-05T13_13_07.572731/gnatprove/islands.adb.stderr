@@ -1,0 +1,3 @@
+islands.adb:39:33: medium: precondition might fail, cannot prove i not in N_Range (e.g. when i = 4)[#0]
+islands.adb:40:31: medium: overflow check might fail[#1]
+islands.ads:36:14: medium: postcondition might fail, cannot prove Count_Islands'Result < (N * M)[#2]

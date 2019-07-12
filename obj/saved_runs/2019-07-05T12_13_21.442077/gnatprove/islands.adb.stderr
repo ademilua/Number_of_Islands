@@ -1,0 +1,8 @@
+islands.adb:19:20: medium: precondition might fail, cannot prove Map_Array(i,j)=1 (e.g. when i = 1 and j = 1)[#0]
+islands.adb:20:20: medium: precondition might fail, cannot prove Map_Array(i,j)=1 (e.g. when i = 1 and j = 1)[#1]
+islands.adb:21:20: medium: precondition might fail, cannot prove Map_Array(i,j)=1 (e.g. when i = 1 and j = 1)[#2]
+islands.adb:22:20: medium: precondition might fail, cannot prove Map_Array(i,j)=1 (e.g. when i = 1 and j = 1)[#3]
+islands.adb:40:31: medium: overflow check might fail[#6]
+islands.ads:28:44: medium: array index check might fail[#4]
+islands.ads:28:46: medium: array index check might fail (e.g. when j = 6)[#5]
+islands.ads:33:14: medium: postcondition might fail, cannot prove Count_Islands'Result < (N * M)[#7]

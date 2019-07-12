@@ -1,0 +1,2 @@
+islands.ads:31:07: warning: postcondition does not check the outcome of calling "Visit_Islands"
+islands.ads:31:07: warning: postcondition does not mention function result

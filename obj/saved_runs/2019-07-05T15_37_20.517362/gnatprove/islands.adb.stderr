@@ -1,0 +1,2 @@
+islands.adb:43:31: medium: overflow check might fail[#1]
+islands.ads:32:15: medium: postcondition might fail, cannot prove Visit_Islands'Result = Visited_Array[#0]

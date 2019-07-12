@@ -1,0 +1,2 @@
+main.adb:3:11: warning: "islands.count" is not modified, could be INPUT[#0]
+main.adb:12:32: side effects of function "Count_Islands" are not modeled in SPARK
