@@ -9,7 +9,7 @@ Your task will be to count the number of islands on that map. An island is consi
 Land tiles can only be connected either vertically or horizontally.
 Input:
 A text file that on the first line contains two integers N M. This line is followed by N lines filled that have M characters (0, 1) each.
-4 5
+4 * 5
 10110
 00010
 00101
